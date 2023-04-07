@@ -14,6 +14,7 @@
 		D5A8A50A29E05E84004729EF /* RedditProyectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A50929E05E84004729EF /* RedditProyectTests.swift */; };
 		D5A8A51429E05E84004729EF /* RedditProyectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A51329E05E84004729EF /* RedditProyectUITests.swift */; };
 		D5A8A51629E05E84004729EF /* RedditProyectUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A51529E05E84004729EF /* RedditProyectUITestsLaunchTests.swift */; };
+		D5A8A52329E0656C004729EF /* NewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A52229E0656C004729EF /* NewTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		D5A8A50F29E05E84004729EF /* RedditProyectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RedditProyectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5A8A51329E05E84004729EF /* RedditProyectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditProyectUITests.swift; sourceTree = "<group>"; };
 		D5A8A51529E05E84004729EF /* RedditProyectUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditProyectUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D5A8A52229E0656C004729EF /* NewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 			children = (
 				D5A8A4F229E05E83004729EF /* AppDelegate.swift */,
 				D5A8A4F629E05E83004729EF /* NewsViewController.swift */,
+				D5A8A52229E0656C004729EF /* NewTableViewCell.swift */,
 				D5A8A4FB29E05E83004729EF /* Assets.xcassets */,
 				D5A8A4FD29E05E83004729EF /* LaunchScreen.storyboard */,
 				D5A8A50029E05E83004729EF /* Info.plist */,
@@ -251,6 +254,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5A8A52329E0656C004729EF /* NewTableViewCell.swift in Sources */,
 				D5A8A4F729E05E83004729EF /* NewsViewController.swift in Sources */,
 				D5A8A4F329E05E83004729EF /* AppDelegate.swift in Sources */,
 			);
