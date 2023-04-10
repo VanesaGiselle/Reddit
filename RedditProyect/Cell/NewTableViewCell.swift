@@ -13,8 +13,8 @@ class NewTableViewCell: UITableViewCell {
         let title: String
         let author: String
         let date: String
-        let numberOfComments: String
-        let isUnread: Bool
+        let numComments: Int
+        let visited: Bool
     }
     
     static var reuseIdentifier = "NewTableViewCell"
@@ -39,17 +39,17 @@ class NewTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var numberOfCommentsLabel: UILabel = {
+    private lazy var numCommentsLabel: UILabel = {
         let label = UILabel()
         return label
     }()
     
-    private lazy var unreadStatusView: UIView = {
+    private lazy var visitedStatusView: UIView = {
         let view = UIView()
         return view
     }()
     
-    private lazy var unreadStatusLabel: UILabel = {
+    private lazy var visitedStatusLabel: UILabel = {
         let label = UILabel()
         return label
     }()
@@ -67,34 +67,34 @@ class NewTableViewCell: UITableViewCell {
         titleLabel.text = viewModel.title
         authorLabel.text = viewModel.author
         dateLabel.text = viewModel.date
-        numberOfCommentsLabel.text = viewModel.numberOfComments
-        unreadStatusView.backgroundColor = viewModel.isUnread ? .green : .red
-        unreadStatusLabel.text = viewModel.isUnread ? "Unread" : "Read"
+        numCommentsLabel.text = String(viewModel.numComments)
+        visitedStatusView.backgroundColor = !viewModel.visited ? .green : .red
+        visitedStatusLabel.text = !viewModel.visited ? "Unread" : "Read"
         
         if let thumbnail = viewModel.thumbnail {
             showThumbnail(picture: thumbnail)
         }
     }
     
-    func showThumbnail(picture: String) {
+    private func showThumbnail(picture: String) {
     }
     
-    func setup() {
+    private func setup() {
         thumbnailImageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         authorLabel.translatesAutoresizingMaskIntoConstraints = false
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        numberOfCommentsLabel.translatesAutoresizingMaskIntoConstraints = false
-        unreadStatusView.translatesAutoresizingMaskIntoConstraints = false
-        unreadStatusLabel.translatesAutoresizingMaskIntoConstraints = false
+        numCommentsLabel.translatesAutoresizingMaskIntoConstraints = false
+        visitedStatusView.translatesAutoresizingMaskIntoConstraints = false
+        visitedStatusLabel.translatesAutoresizingMaskIntoConstraints = false
         
         self.contentView.addSubview(thumbnailImageView)
         self.contentView.addSubview(titleLabel)
         self.contentView.addSubview(authorLabel)
         self.contentView.addSubview(dateLabel)
-        self.contentView.addSubview(numberOfCommentsLabel)
-        self.contentView.addSubview(unreadStatusView)
-        unreadStatusView.addSubview(unreadStatusLabel)
+        self.contentView.addSubview(numCommentsLabel)
+        self.contentView.addSubview(visitedStatusView)
+        visitedStatusView.addSubview(visitedStatusLabel)
 
         NSLayoutConstraint.activate([
             thumbnailImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 20),
@@ -114,15 +114,15 @@ class NewTableViewCell: UITableViewCell {
             dateLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15),
             dateLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15),
 
-            unreadStatusView.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 20),
-            unreadStatusView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15),
-            unreadStatusView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15),
-            unreadStatusView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -20),
+            visitedStatusView.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 20),
+            visitedStatusView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15),
+            visitedStatusView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15),
+            visitedStatusView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -20),
             
-            unreadStatusLabel.topAnchor.constraint(equalTo: unreadStatusView.topAnchor, constant: 5),
-            unreadStatusLabel.leadingAnchor.constraint(equalTo: unreadStatusView.leadingAnchor, constant: 15),
-            unreadStatusLabel.trailingAnchor.constraint(equalTo: unreadStatusView.trailingAnchor, constant: -15),
-            unreadStatusLabel.bottomAnchor.constraint(equalTo: unreadStatusView.bottomAnchor, constant: -5)
+            visitedStatusLabel.topAnchor.constraint(equalTo: visitedStatusView.topAnchor, constant: 5),
+            visitedStatusLabel.leadingAnchor.constraint(equalTo: visitedStatusView.leadingAnchor, constant: 15),
+            visitedStatusLabel.trailingAnchor.constraint(equalTo: visitedStatusView.trailingAnchor, constant: -15),
+            visitedStatusLabel.bottomAnchor.constraint(equalTo: visitedStatusView.bottomAnchor, constant: -5)
         ])
     }
 }
