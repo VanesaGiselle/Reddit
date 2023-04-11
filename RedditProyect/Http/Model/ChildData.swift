@@ -8,14 +8,16 @@
 import Foundation
 
 struct ChildData: Codable {
-    let preview: Preview
+    let id: String
+    let thumbnail: String
     let title: String
     let author: String
     let visited: Bool
     let numComments: Int
     
     private enum CodingKeys: String, CodingKey {
-        case preview
+        case id
+        case thumbnail
         case title
         case author
         case visited

@@ -94,7 +94,7 @@ class HttpConnector {
     
     //MARK: - GET
     
-    func getNews(completionHandler: @escaping(Result<Reddit, ErrorHandler>) -> Void, limit: String?) {
+    func getNews(completionHandler: @escaping(Result<News, ErrorHandler>) -> Void, limit: String?) {
         
         let queryParams = ["limit": limit].compactMapValues({ $0 })
         

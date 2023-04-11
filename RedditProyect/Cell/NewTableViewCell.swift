@@ -9,48 +9,71 @@ import UIKit
 
 class NewTableViewCell: UITableViewCell {
     struct ViewModel {
+        let id: String
         let thumbnail: String?
         let title: String
         let author: String
-        let date: String
+        let date: Date
         let numComments: Int
         let visited: Bool
     }
     
     static var reuseIdentifier = "NewTableViewCell"
     
-    private lazy var thumbnailImageView: UIImageView = {
-        let image = UIImageView()
-        return image
-    }()
+    private lazy var thumbnailConstraints = [
+        thumbnailImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+        thumbnailImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15),
+        thumbnailImageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15),
+        thumbnailImageView.heightAnchor.constraint(equalToConstant: 200),
+        numCommentsLabel.topAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor, constant: 20),
+    ]
     
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        return label
-    }()
+    private lazy var withoutThumbnailConstraint =                         numCommentsLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20)
     
     private lazy var authorLabel: UILabel = {
         let label = UILabel()
+        label.font = label.font.withSize(12)
         return label
     }()
     
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
+        label.font = label.font.withSize(12)
+        label.textColor = .gray
+        label.textAlignment = .left
         return label
+    }()
+    
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 18.0)
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private lazy var thumbnailImageView: UIImageView = {
+        let image = UIImageView()
+        image.contentMode = .scaleAspectFill
+        return image
+    }()
+    
+    private lazy var commentImageView: UIImageView = {
+        let image = UIImageView()
+        image.contentMode = .scaleAspectFit
+        return image
     }()
     
     private lazy var numCommentsLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .gray
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         return label
-    }()
-    
-    private lazy var visitedStatusView: UIView = {
-        let view = UIView()
-        return view
     }()
     
     private lazy var visitedStatusLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .gray
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         return label
     }()
     
@@ -64,65 +87,85 @@ class NewTableViewCell: UITableViewCell {
     }
     
     func render(viewModel: ViewModel) {
+        if viewModel.thumbnail != nil {
+            showThumbnail(viewModel: viewModel)
+        }
+        commentImageView.image = UIImage(named: "comment")
         titleLabel.text = viewModel.title
         authorLabel.text = viewModel.author
-        dateLabel.text = viewModel.date
+        dateLabel.text = viewModel.date.toString()
         numCommentsLabel.text = String(viewModel.numComments)
-        visitedStatusView.backgroundColor = !viewModel.visited ? .green : .red
-        visitedStatusLabel.text = !viewModel.visited ? "Unread" : "Read"
-        
-        if let thumbnail = viewModel.thumbnail {
-            showThumbnail(picture: thumbnail)
-        }
+        visitedStatusLabel.text = viewModel.visited ? "Read" : "Unread"
     }
     
-    private func showThumbnail(picture: String) {
+    private func showThumbnail(viewModel: ViewModel) {
+        guard let url = viewModel.thumbnail else {
+            return
+        }
+        
+        NSLayoutConstraint.activate(self.thumbnailConstraints)
+        NSLayoutConstraint.deactivate([self.withoutThumbnailConstraint])
+        
+        let id = viewModel.id
+        thumbnailImageView.download(from: url, completionHandler: { image in
+            if id == viewModel.id {
+                UIImageView.transition(with: self.thumbnailImageView, duration: 0.5, options: [.curveEaseOut, .transitionCrossDissolve], animations: {
+                    self.thumbnailImageView.image = image
+                    self.thumbnailImageView.clipsToBounds = true
+                })
+            } else {
+                NSLayoutConstraint.activate([self.withoutThumbnailConstraint])
+                NSLayoutConstraint.deactivate(self.thumbnailConstraints)
+            }
+        })
     }
     
     private func setup() {
-        thumbnailImageView.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        authorLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        dateLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+
         authorLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
+        thumbnailImageView.translatesAutoresizingMaskIntoConstraints = false
+        commentImageView.translatesAutoresizingMaskIntoConstraints = false
         numCommentsLabel.translatesAutoresizingMaskIntoConstraints = false
-        visitedStatusView.translatesAutoresizingMaskIntoConstraints = false
         visitedStatusLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        self.contentView.addSubview(thumbnailImageView)
-        self.contentView.addSubview(titleLabel)
         self.contentView.addSubview(authorLabel)
         self.contentView.addSubview(dateLabel)
+        self.contentView.addSubview(titleLabel)
+        self.contentView.addSubview(thumbnailImageView)
+        self.contentView.addSubview(commentImageView)
         self.contentView.addSubview(numCommentsLabel)
-        self.contentView.addSubview(visitedStatusView)
-        visitedStatusView.addSubview(visitedStatusLabel)
+        self.contentView.addSubview(visitedStatusLabel)
 
+        NSLayoutConstraint.activate([self.withoutThumbnailConstraint])
+        NSLayoutConstraint.deactivate(self.thumbnailConstraints)
+        
         NSLayoutConstraint.activate([
-            thumbnailImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 20),
-            thumbnailImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15),
-            thumbnailImageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15),
-            thumbnailImageView.heightAnchor.constraint(equalToConstant: 200),
+            authorLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 20),
+            authorLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15),
             
-            titleLabel.topAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor, constant: 20),
+            dateLabel.centerYAnchor.constraint(equalTo: authorLabel.centerYAnchor),
+            dateLabel.leadingAnchor.constraint(equalTo: self.authorLabel.trailingAnchor, constant: 10),
+            dateLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15),
+            
+            titleLabel.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 15),
             titleLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15),
             titleLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15),
             
-            authorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-            authorLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15),
-            authorLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15),
+            commentImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15),
+            commentImageView.centerYAnchor.constraint(equalTo: self.numCommentsLabel.centerYAnchor),
+            commentImageView.heightAnchor.constraint(equalToConstant: 18),
+            commentImageView.widthAnchor.constraint(equalTo: commentImageView.heightAnchor),
             
-            dateLabel.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 20),
-            dateLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15),
-            dateLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15),
-
-            visitedStatusView.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 20),
-            visitedStatusView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15),
-            visitedStatusView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15),
-            visitedStatusView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -20),
+            numCommentsLabel.leadingAnchor.constraint(equalTo: self.commentImageView.trailingAnchor, constant: 10),
             
-            visitedStatusLabel.topAnchor.constraint(equalTo: visitedStatusView.topAnchor, constant: 5),
-            visitedStatusLabel.leadingAnchor.constraint(equalTo: visitedStatusView.leadingAnchor, constant: 15),
-            visitedStatusLabel.trailingAnchor.constraint(equalTo: visitedStatusView.trailingAnchor, constant: -15),
-            visitedStatusLabel.bottomAnchor.constraint(equalTo: visitedStatusView.bottomAnchor, constant: -5)
+            visitedStatusLabel.centerYAnchor.constraint(equalTo: numCommentsLabel.centerYAnchor),
+            visitedStatusLabel.leadingAnchor.constraint(equalTo: numCommentsLabel.trailingAnchor, constant: 15),
+            visitedStatusLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15),
+            visitedStatusLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -15)
         ])
     }
 }

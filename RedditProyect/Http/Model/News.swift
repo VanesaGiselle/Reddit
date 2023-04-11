@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct Reddit: Codable {
+struct News: Codable {
     let data: Data
 }

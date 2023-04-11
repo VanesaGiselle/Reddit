@@ -49,7 +49,7 @@ class NewsViewController: UIViewController {
             switch result {
             case .success(let reddit):
                 for new in reddit.data.children {
-                    self.news.append(New(thumbnail: new.data.preview.images.first?.source.url, title: new.data.title, author: new.data.author, date: "", numComments: new.data.numComments, visited: new.data.visited))
+                    self.news.append(New(id: new.data.id, thumbnail: new.data.thumbnail, title: new.data.title, author: new.data.author, date: "", numComments: new.data.numComments, visited: new.data.visited))
                 }
                 self.tableView.reloadData()
             case .failure(let error):
@@ -72,10 +72,11 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
         let new = news[indexPath.row]
         
         let viewModel = NewTableViewCell.ViewModel(
+            id: new.id,
             thumbnail: new.thumbnail,
             title: new.title,
             author: new.author,
-            date: new.date ?? "",
+            date: new.date,
             numComments: new.numComments,
             visited: new.visited
         )
