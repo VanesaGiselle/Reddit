@@ -10,6 +10,12 @@ import UIKit
 class NewsViewController: UIViewController {
     private var news: [New] = []
     
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+        return refreshControl
+    }()
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(NewTableViewCell.self, forCellReuseIdentifier: NewTableViewCell.reuseIdentifier)
@@ -31,9 +37,11 @@ class NewsViewController: UIViewController {
     private func setup() {
         view.backgroundColor = .white
         
+        refreshControl.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         self.view.addSubview(tableView)
+        tableView.addSubview(refreshControl)
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: self.view.topAnchor),
@@ -48,6 +56,7 @@ class NewsViewController: UIViewController {
             guard let self = self else { return }
             switch result {
             case .success(let reddit):
+                self.refreshControl.endRefreshing()
                 for new in reddit.data.children {
                     self.news.append(New(id: new.data.id, thumbnail: new.data.thumbnail, title: new.data.title, author: new.data.author, date: "", numComments: new.data.numComments, visited: new.data.visited))
                 }
@@ -57,6 +66,10 @@ class NewsViewController: UIViewController {
                 break
             }
         }, limit: "10")
+    }
+    
+    @objc func pullToRefresh() {
+        getNews()
     }
 }
 

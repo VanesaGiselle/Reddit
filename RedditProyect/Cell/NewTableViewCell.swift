@@ -73,6 +73,7 @@ class NewTableViewCell: UITableViewCell {
     private lazy var visitedStatusLabel: UILabel = {
         let label = UILabel()
         label.textColor = .gray
+        label.textAlignment = .right
         label.font = UIFont.boldSystemFont(ofSize: 14)
         return label
     }()
@@ -122,8 +123,8 @@ class NewTableViewCell: UITableViewCell {
     
     private func setup() {
         authorLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        dateLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
-
+        numCommentsLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        
         authorLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         dateLabel.translatesAutoresizingMaskIntoConstraints = false

@@ -14,6 +14,8 @@ class New {
     var author: String
     var numComments: Int
     var visited: Bool
+    
+    // Random date was created because API is deprecated and don't have dates.
     var date: Date {
         let date = Date()
         let calendar = Calendar.current

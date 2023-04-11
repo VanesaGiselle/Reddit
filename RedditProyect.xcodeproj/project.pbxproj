@@ -25,6 +25,8 @@
 		D5A8A53A29E48ADF004729EF /* New.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A53929E48ADF004729EF /* New.swift */; };
 		D5A8A54029E493E3004729EF /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A53F29E493E3004729EF /* UIImage+Extension.swift */; };
 		D5A8A54329E578F8004729EF /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A54229E578F8004729EF /* Date+Extension.swift */; };
+		D5A8A54529E58FAB004729EF /* DateRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A54429E58FAB004729EF /* DateRange.swift */; };
+		D5A8A54729E59279004729EF /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A54629E59279004729EF /* TimeInterval.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		D5A8A53929E48ADF004729EF /* New.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = New.swift; sourceTree = "<group>"; };
 		D5A8A53F29E493E3004729EF /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		D5A8A54229E578F8004729EF /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		D5A8A54429E58FAB004729EF /* DateRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRange.swift; sourceTree = "<group>"; };
+		D5A8A54629E59279004729EF /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +201,8 @@
 			isa = PBXGroup;
 			children = (
 				D5A8A53F29E493E3004729EF /* UIImage+Extension.swift */,
+				D5A8A54429E58FAB004729EF /* DateRange.swift */,
+				D5A8A54629E59279004729EF /* TimeInterval.swift */,
 				D5A8A54229E578F8004729EF /* Date+Extension.swift */,
 			);
 			path = Extension;
@@ -333,6 +339,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5A8A53A29E48ADF004729EF /* New.swift in Sources */,
+				D5A8A54729E59279004729EF /* TimeInterval.swift in Sources */,
+				D5A8A54529E58FAB004729EF /* DateRange.swift in Sources */,
 				D5A8A52E29E45BC8004729EF /* ChildData.swift in Sources */,
 				D5A8A54329E578F8004729EF /* Date+Extension.swift in Sources */,
 				D5A8A52C29E45BAD004729EF /* Data.swift in Sources */,
