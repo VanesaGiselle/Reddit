@@ -97,4 +97,8 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
         tableViewCell.render(viewModel: viewModel)
         return tableViewCell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
 }

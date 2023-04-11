@@ -27,6 +27,7 @@
 		D5A8A54329E578F8004729EF /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A54229E578F8004729EF /* Date+Extension.swift */; };
 		D5A8A54529E58FAB004729EF /* DateRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A54429E58FAB004729EF /* DateRange.swift */; };
 		D5A8A54729E59279004729EF /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A54629E59279004729EF /* TimeInterval.swift */; };
+		D5A8A54929E5D369004729EF /* NewDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A54829E5D369004729EF /* NewDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		D5A8A54229E578F8004729EF /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		D5A8A54429E58FAB004729EF /* DateRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRange.swift; sourceTree = "<group>"; };
 		D5A8A54629E59279004729EF /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
+		D5A8A54829E5D369004729EF /* NewDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				D5A8A4F629E05E83004729EF /* NewsViewController.swift */,
+				D5A8A54829E5D369004729EF /* NewDetailViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				D5A8A54529E58FAB004729EF /* DateRange.swift in Sources */,
 				D5A8A52E29E45BC8004729EF /* ChildData.swift in Sources */,
 				D5A8A54329E578F8004729EF /* Date+Extension.swift in Sources */,
+				D5A8A54929E5D369004729EF /* NewDetailViewController.swift in Sources */,
 				D5A8A52C29E45BAD004729EF /* Data.swift in Sources */,
 				D5A8A53829E45DF4004729EF /* HttpMethod.swift in Sources */,
 				D5A8A52329E0656C004729EF /* NewTableViewCell.swift in Sources */,
