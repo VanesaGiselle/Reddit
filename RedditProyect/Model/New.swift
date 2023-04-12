@@ -14,7 +14,7 @@ class New {
     var author: String
     var numComments: Int
     var visited: Bool
-    
+    var description: String = "Hola"
     // Random date was created because API is deprecated and don't have dates.
     var date: Date {
         let date = Date()

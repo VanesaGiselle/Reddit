@@ -99,6 +99,19 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let newDetailViewController = NewDetailViewController()
         
+        let new = news[indexPath.row]
+        let viewModel = NewDetailViewController.ViewModel(
+            id: new.id,
+            thumbnail: new.thumbnail,
+            title: new.title,
+            author: new.author,
+            date: new.date,
+            description: new.description
+        )
+        newDetailViewController.render(viewModel: viewModel)
+        
+        self.navigationController?.pushViewController(newDetailViewController, animated: true)
     }
 }
