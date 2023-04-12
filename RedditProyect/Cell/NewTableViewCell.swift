@@ -15,7 +15,7 @@ class NewTableViewCell: UITableViewCell {
         let author: String
         let date: Date
         let numComments: Int
-        let visited: Bool
+        let read: Bool
     }
     
     static var reuseIdentifier = "NewTableViewCell"
@@ -70,7 +70,7 @@ class NewTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var visitedStatusLabel: UILabel = {
+    private lazy var readStatusLabel: UILabel = {
         let label = UILabel()
         label.textColor = .gray
         label.textAlignment = .right
@@ -96,7 +96,7 @@ class NewTableViewCell: UITableViewCell {
         authorLabel.text = viewModel.author
         dateLabel.text = viewModel.date.toString()
         numCommentsLabel.text = String(viewModel.numComments)
-        visitedStatusLabel.text = viewModel.visited ? "Read" : "Unread"
+        readStatusLabel.text = viewModel.read ? "Read" : "Unread"
     }
     
     private func showThumbnail(viewModel: ViewModel) {
@@ -131,7 +131,7 @@ class NewTableViewCell: UITableViewCell {
         thumbnailImageView.translatesAutoresizingMaskIntoConstraints = false
         commentImageView.translatesAutoresizingMaskIntoConstraints = false
         numCommentsLabel.translatesAutoresizingMaskIntoConstraints = false
-        visitedStatusLabel.translatesAutoresizingMaskIntoConstraints = false
+        readStatusLabel.translatesAutoresizingMaskIntoConstraints = false
         
         self.contentView.addSubview(authorLabel)
         self.contentView.addSubview(dateLabel)
@@ -139,7 +139,7 @@ class NewTableViewCell: UITableViewCell {
         self.contentView.addSubview(thumbnailImageView)
         self.contentView.addSubview(commentImageView)
         self.contentView.addSubview(numCommentsLabel)
-        self.contentView.addSubview(visitedStatusLabel)
+        self.contentView.addSubview(readStatusLabel)
 
         NSLayoutConstraint.activate([self.withoutThumbnailConstraint])
         NSLayoutConstraint.deactivate(self.thumbnailConstraints)
@@ -163,10 +163,10 @@ class NewTableViewCell: UITableViewCell {
             
             numCommentsLabel.leadingAnchor.constraint(equalTo: self.commentImageView.trailingAnchor, constant: 10),
             
-            visitedStatusLabel.centerYAnchor.constraint(equalTo: numCommentsLabel.centerYAnchor),
-            visitedStatusLabel.leadingAnchor.constraint(equalTo: numCommentsLabel.trailingAnchor, constant: 15),
-            visitedStatusLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15),
-            visitedStatusLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -15)
+            readStatusLabel.centerYAnchor.constraint(equalTo: numCommentsLabel.centerYAnchor),
+            readStatusLabel.leadingAnchor.constraint(equalTo: numCommentsLabel.trailingAnchor, constant: 15),
+            readStatusLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15),
+            readStatusLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -15)
         ])
     }
 }

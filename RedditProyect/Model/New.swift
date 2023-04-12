@@ -13,8 +13,19 @@ class New {
     var title: String
     var author: String
     var numComments: Int
-    var visited: Bool
     var description: String = "Hola"
+    
+    var read: Bool {
+        let readNewsIds = UserConfiguration().getNewsId()
+        
+        for readNewsId in readNewsIds {
+            if self.id == readNewsId {
+                return true
+            }
+        }
+        return false
+    }
+    
     // Random date was created because API is deprecated and don't have dates.
     var date: Date {
         let date = Date()
@@ -28,7 +39,7 @@ class New {
             let minutes = calendar.range(of: .minute, in: .hour, for: date),
             let randomMinute = minutes.randomElement()
         else {
-                return Date()
+            return Date()
         }
         dateComponents.setValue(randomDay, for: .day)
         dateComponents.setValue(randomHour, for: .hour)
@@ -36,12 +47,11 @@ class New {
         return calendar.date(from: dateComponents) ?? Date()
     }
     
-    init(id: String, thumbnail: String?, title: String, author: String, date: String?, numComments: Int, visited: Bool) {
+    init(id: String, thumbnail: String?, title: String, author: String, date: String?, numComments: Int) {
         self.id = id
         self.thumbnail = thumbnail
         self.title = title
         self.author = author
         self.numComments = numComments
-        self.visited = visited
     }
 }

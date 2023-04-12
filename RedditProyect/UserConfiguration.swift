@@ -8,14 +8,18 @@
 import UIKit
 
 class UserConfiguration {
-    private static let alreadyReadNewId = "alreadyReadNewId"
+    private let alreadyReadNewId = "alreadyReadNewId"
     private let defaults = UserDefaults.standard
     private var readNewsIds: [String] = []
     
     func setReadNew(id: String) {
-        var newsIds: [String] = readNewsIds
+        var newsIds = readNewsIds
         newsIds.append(id)
         readNewsIds = newsIds
-        defaults.set(newsIds, forKey: UserConfiguration.alreadyReadNewId)
+        defaults.set(newsIds, forKey: alreadyReadNewId)
+    }
+    
+    func getNewsId() -> [String] {
+        return defaults.array(forKey: alreadyReadNewId) as? [String] ?? []
     }
 }

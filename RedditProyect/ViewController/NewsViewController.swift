@@ -56,9 +56,8 @@ class NewsViewController: UIViewController {
             guard let self = self else { return }
             switch result {
             case .success(let reddit):
-                self.refreshControl.endRefreshing()
                 for new in reddit.data.children {
-                    self.news.append(New(id: new.data.id, thumbnail: new.data.thumbnail, title: new.data.title, author: new.data.author, date: "", numComments: new.data.numComments, visited: new.data.visited))
+                    self.news.append(New(id: new.data.id, thumbnail: new.data.thumbnail, title: new.data.title, author: new.data.author, date: "", numComments: new.data.numComments))
                 }
                 self.tableView.reloadData()
             case .failure(let error):
@@ -69,6 +68,7 @@ class NewsViewController: UIViewController {
     }
     
     @objc func pullToRefresh() {
+        refreshControl.endRefreshing()
         getNews()
     }
 }
@@ -91,7 +91,7 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
             author: new.author,
             date: new.date,
             numComments: new.numComments,
-            visited: new.visited
+            read: new.read
         )
         
         tableViewCell.render(viewModel: viewModel)

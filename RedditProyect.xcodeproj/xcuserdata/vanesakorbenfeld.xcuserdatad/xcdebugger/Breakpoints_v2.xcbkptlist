@@ -14,8 +14,8 @@
             filePath = "RedditProyect/ViewController/NewDetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
             landmarkName = "thumbnailTapped()"
             landmarkType = "7">
          </BreakpointContent>

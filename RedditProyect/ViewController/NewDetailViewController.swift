@@ -70,8 +70,15 @@ class NewDetailViewController: UIViewController {
         setup()
     }
     
+    func readNew(id: String) {
+        UserConfiguration().setReadNew(id: id)
+    }
+    
     func render(viewModel: ViewModel) {
         self.viewModel = viewModel
+        
+        readNew(id: viewModel.id)
+        
         if viewModel.thumbnail != nil {
             showThumbnail(viewModel: viewModel)
         }
