@@ -9,6 +9,8 @@ import UIKit
 
 class NewsViewController: UIViewController {
     private var news: [New] = []
+    private var currentPage = 1
+    private var totalPages = 1
     
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -19,6 +21,7 @@ class NewsViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(NewTableViewCell.self, forCellReuseIdentifier: NewTableViewCell.reuseIdentifier)
+        tableView.register(LoadingTableViewCell.self, forCellReuseIdentifier: LoadingTableViewCell.reuseIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
         return tableView
@@ -114,4 +117,14 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
         
         self.navigationController?.pushViewController(newDetailViewController, animated: true)
     }
+    
+//    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+//
+//        if ((tableView.contentOffset.y + tableView.frame.size.height) >= tableView.contentSize.height)
+//        {
+//             DispatchQueue.main.async {
+//                 self.getNextPage()
+//             }
+//        }
+//    }
 }

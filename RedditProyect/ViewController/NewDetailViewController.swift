@@ -29,6 +29,17 @@ class NewDetailViewController: UIViewController {
     
     private lazy var withoutThumbnailConstraint =                         descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20)
     
+    private lazy var thumbnailFullScreenImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.frame = UIScreen.main.bounds
+        imageView.backgroundColor = UIColor(displayP3Red: 0/255, green: 0/255, blue: 0/255, alpha: 0.7)
+        imageView.contentMode = .scaleAspectFit
+        imageView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
+        imageView.addGestureRecognizer(tap)
+        return imageView
+    }()
+    
     private lazy var authorLabel: UILabel = {
         let label = UILabel()
         label.font = label.font.withSize(12)
@@ -54,7 +65,7 @@ class NewDetailViewController: UIViewController {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
         image.isUserInteractionEnabled = true
-        image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(thumbnailTapped)))
+        image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTapped)))
         return image
     }()
     
@@ -72,6 +83,20 @@ class NewDetailViewController: UIViewController {
     
     func readNew(id: String) {
         UserConfiguration().setReadNew(id: id)
+    }
+    
+    @objc func imageTapped(_ sender: UITapGestureRecognizer) {
+        guard let imageView = sender.view as? UIImageView else { return }
+        thumbnailFullScreenImageView.image = imageView.image
+        self.view.addSubview(thumbnailFullScreenImageView)
+        self.navigationController?.isNavigationBarHidden = true
+        self.tabBarController?.tabBar.isHidden = true
+    }
+
+    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
+        self.navigationController?.isNavigationBarHidden = false
+        self.tabBarController?.tabBar.isHidden = false
+        sender.view?.removeFromSuperview()
     }
     
     func render(viewModel: ViewModel) {
@@ -109,14 +134,6 @@ class NewDetailViewController: UIViewController {
                 NSLayoutConstraint.deactivate(self.thumbnailConstraints)
             }
         })
-    }
-    
-    @objc func thumbnailTapped() {
-        guard let thumbnail = viewModel?.thumbnail else { return }
-        let fullScreenViewController = FullScreenViewController()
-        fullScreenViewController.render(viewModel: FullScreenViewController.ViewModel(thumbnail: thumbnail))
-        fullScreenViewController.modalPresentationStyle = .overFullScreen
-        self.navigationController?.present(fullScreenViewController, animated: false)
     }
     
     private func setup() {

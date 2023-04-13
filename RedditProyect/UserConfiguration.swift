@@ -10,12 +10,10 @@ import UIKit
 class UserConfiguration {
     private let alreadyReadNewId = "alreadyReadNewId"
     private let defaults = UserDefaults.standard
-    private var readNewsIds: [String] = []
     
     func setReadNew(id: String) {
-        var newsIds = readNewsIds
+        var newsIds = getNewsId()
         newsIds.append(id)
-        readNewsIds = newsIds
         defaults.set(newsIds, forKey: alreadyReadNewId)
     }
     
