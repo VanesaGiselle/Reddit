@@ -7,7 +7,7 @@
 
 import Foundation
 
-class New {
+class New: Equatable {
     var id: String
     var thumbnail: String?
     var title: String
@@ -27,7 +27,7 @@ class New {
     }
     
     // Random date was created because API is deprecated and don't have dates.
-    var date: Date {
+    lazy var date: Date = {
         let date = Date()
         let calendar = Calendar.current
         var dateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
@@ -45,13 +45,17 @@ class New {
         dateComponents.setValue(randomHour, for: .hour)
         dateComponents.setValue(randomMinute, for: .hour)
         return calendar.date(from: dateComponents) ?? Date()
-    }
+    }()
     
-    init(id: String, thumbnail: String?, title: String, author: String, date: String?, numComments: Int) {
+    init(id: String, thumbnail: String?, title: String, author: String, numComments: Int) {
         self.id = id
         self.thumbnail = thumbnail
         self.title = title
         self.author = author
         self.numComments = numComments
+    }
+    
+    static func ==(left: New, right: New) -> Bool {
+        return left.id == right.id
     }
 }

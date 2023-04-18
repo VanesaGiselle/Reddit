@@ -9,8 +9,13 @@ import UIKit
 
 class NewsViewController: UIViewController {
     private var news: [New] = []
-    private var currentPage = 1
-    private var totalPages = 1
+    private var start = 10
+    
+//    private lazy var removeAllButton: UIButton = {
+//        let button = UIButton()
+//        button.addTarget(self, action: #selector(removeAllTapped), for: .touchUpInside)
+//        return button
+//    }()
     
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -21,20 +26,25 @@ class NewsViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(NewTableViewCell.self, forCellReuseIdentifier: NewTableViewCell.reuseIdentifier)
-        tableView.register(LoadingTableViewCell.self, forCellReuseIdentifier: LoadingTableViewCell.reuseIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
         return tableView
     }()
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        getNews()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        getNews(pagination: false, limit: start)
         setup()
+    }
+    
+    private func createFooter() -> UIView {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 50))
+        let activityIndicator = UIActivityIndicatorView()
+        
+        footerView.addSubview(activityIndicator)
+        activityIndicator.center = footerView.center
+        activityIndicator.startAnimating()
+        return footerView
     }
     
     private func setup() {
@@ -54,25 +64,46 @@ class NewsViewController: UIViewController {
         ])
     }
     
-    private func getNews() {
+    private func getNews(pagination: Bool, limit: Int) {
         HttpConnector().getNews(completionHandler: { [weak self] result in
             guard let self = self else { return }
+            self.tableView.tableFooterView = nil
+
+            if pagination {
+                HttpConnector().isPagination = false
+            }
             switch result {
-            case .success(let reddit):
-                for new in reddit.data.children {
-                    self.news.append(New(id: new.data.id, thumbnail: new.data.thumbnail, title: new.data.title, author: new.data.author, date: "", numComments: new.data.numComments))
+            case .success(let apiData):
+                for new in apiData.data.children {
+                    self.news.append(New(id: new.data.id, thumbnail: new.data.thumbnail, title: new.data.title, author: new.data.author, numComments: new.data.numComments))
                 }
-                self.tableView.reloadData()
+                self.news = self.news.getUniqueElements()
+                if limit == 10 {
+                    self.tableView.reloadData()
+                } else {
+                    DispatchQueue.main.async {
+                        var indexPaths: [IndexPath] = []
+
+                        for i in self.start - 10 ..< self.news.count {
+                            indexPaths.append(IndexPath(row: i - 1, section: 0))
+                        }
+                        
+                        self.tableView.performBatchUpdates({
+                            self.tableView.insertRows(at: indexPaths
+                            , with: .bottom)
+                           }, completion: nil)
+                    }
+                }
             case .failure(let error):
                 //TODO: handle error
                 break
             }
-        }, limit: "10")
+        }, limit: String(limit), pagination: pagination)
     }
     
     @objc func pullToRefresh() {
         refreshControl.endRefreshing()
-        getNews()
+        getNews(pagination: false, limit: start)
     }
 }
 
@@ -118,13 +149,23 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
         self.navigationController?.pushViewController(newDetailViewController, animated: true)
     }
     
-//    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-//
-//        if ((tableView.contentOffset.y + tableView.frame.size.height) >= tableView.contentSize.height)
-//        {
-//             DispatchQueue.main.async {
-//                 self.getNextPage()
-//             }
-//        }
-//    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+      if editingStyle == .delete {
+        self.news.remove(at: indexPath.row)
+        self.tableView.deleteRows(at: [indexPath], with: .automatic)
+      }
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let position = scrollView.contentOffset.y
+        
+        if position > tableView.contentSize.height - 100 - scrollView.frame.size.height {
+            guard !HttpConnector().isPagination else {
+                return
+            }
+            self.tableView.tableFooterView = createFooter()
+            start = start + 10
+            getNews(pagination: true, limit: start)
+        }
+    }
 }

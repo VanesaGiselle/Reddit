@@ -94,7 +94,7 @@ class NewTableViewCell: UITableViewCell {
         commentImageView.image = UIImage(named: "comment")
         titleLabel.text = viewModel.title
         authorLabel.text = viewModel.author
-        dateLabel.text = viewModel.date.toString()
+        dateLabel.text = Date().getDateInterval(interval: viewModel.date.getDateDifferenceToNow())
         numCommentsLabel.text = String(viewModel.numComments)
         readStatusLabel.text = viewModel.read ? "Read" : "Unread"
     }
@@ -113,6 +113,7 @@ class NewTableViewCell: UITableViewCell {
                 UIImageView.transition(with: self.thumbnailImageView, duration: 0.5, options: [.curveEaseOut, .transitionCrossDissolve], animations: {
                     self.thumbnailImageView.image = image
                     self.thumbnailImageView.clipsToBounds = true
+//                    ImageSaver().writeToPhotoAlbum(image: image)
                 })
             } else {
                 NSLayoutConstraint.activate([self.withoutThumbnailConstraint])

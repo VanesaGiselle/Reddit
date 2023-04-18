@@ -110,7 +110,7 @@ class NewDetailViewController: UIViewController {
         
         authorLabel.text = viewModel.author
         titleLabel.text = viewModel.title
-        dateLabel.text = viewModel.date.toString()
+        dateLabel.text = Date().getDateInterval(interval: viewModel.date.getDateDifferenceToNow())
         descriptionLabel.text = viewModel.description
     }
     

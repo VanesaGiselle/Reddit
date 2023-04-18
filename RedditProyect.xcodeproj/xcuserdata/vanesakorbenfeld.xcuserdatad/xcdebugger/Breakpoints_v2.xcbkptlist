@@ -3,4 +3,134 @@
    uuid = "B65D0624-3BC9-47CA-B549-361510318CF4"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AC8E3CD4-E6BB-4B2B-B519-B6A6360B9C67"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RedditProyect/ViewController/NewsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "getNews(pagination:limit:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "74ADA5AE-2F2B-4AAB-9AD0-AE0333E1370F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RedditProyect/ViewController/NewsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0ED6B614-FB40-467B-B628-787BD66A1A69"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RedditProyect/ViewController/NewsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "getNews(pagination:limit:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "543A2F3C-7BBC-4169-ADEF-7D9CC21E11F2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RedditProyectTests/DateExtensionTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "testDateWithWeekDifference_ShouldReturnWeeks()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "31754D62-E30F-48BA-8C4B-E59B0608A03B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RedditProyect/Extension/Date+Extension.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "getDateInterval(interval:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "31754D62-E30F-48BA-8C4B-E59B0608A03B - ec89c00817590069"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Foundation.Date.getDateInterval(interval: (year: Swift.Optional&lt;Swift.Int&gt;, month: Swift.Optional&lt;Swift.Int&gt;, week: Swift.Optional&lt;Swift.Int&gt;, day: Swift.Optional&lt;Swift.Int&gt;, hour: Swift.Optional&lt;Swift.Int&gt;, minute: Swift.Optional&lt;Swift.Int&gt;, second: Swift.Optional&lt;Swift.Int&gt;)) -&gt; Swift.String"
+                  moduleName = "RedditProyect"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vanesakorbenfeld/Desktop/RedditProyect/RedditProyect/Extension/Date+Extension.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "940">
+               </Location>
+               <Location
+                  uuid = "31754D62-E30F-48BA-8C4B-E59B0608A03B - ec89c00817590069"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Foundation.Date.getDateInterval(interval: (year: Swift.Optional&lt;Swift.Int&gt;, month: Swift.Optional&lt;Swift.Int&gt;, week: Swift.Optional&lt;Swift.Int&gt;, day: Swift.Optional&lt;Swift.Int&gt;, hour: Swift.Optional&lt;Swift.Int&gt;, minute: Swift.Optional&lt;Swift.Int&gt;, second: Swift.Optional&lt;Swift.Int&gt;)) -&gt; Swift.String"
+                  moduleName = "RedditProyect"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vanesakorbenfeld/Desktop/RedditProyect/RedditProyect/Extension/Date+Extension.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "960">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "73A261F3-2965-414F-85A2-695F4DB27BCB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RedditProyect/Extension/Date+Extension.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "-(recent:previous:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
