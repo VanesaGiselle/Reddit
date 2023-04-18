@@ -128,6 +128,8 @@ class NewDetailViewController: UIViewController {
                 UIImageView.transition(with: self.thumbnailImageView, duration: 0.5, options: [.curveEaseOut, .transitionCrossDissolve], animations: {
                     self.thumbnailImageView.image = image
                     self.thumbnailImageView.clipsToBounds = true
+                    // Saving image to picture gallery
+                    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                 })
             } else {
                 NSLayoutConstraint.activate([self.withoutThumbnailConstraint])

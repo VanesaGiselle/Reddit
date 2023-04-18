@@ -113,7 +113,6 @@ class NewTableViewCell: UITableViewCell {
                 UIImageView.transition(with: self.thumbnailImageView, duration: 0.5, options: [.curveEaseOut, .transitionCrossDissolve], animations: {
                     self.thumbnailImageView.image = image
                     self.thumbnailImageView.clipsToBounds = true
-//                    ImageSaver().writeToPhotoAlbum(image: image)
                 })
             } else {
                 NSLayoutConstraint.activate([self.withoutThumbnailConstraint])
