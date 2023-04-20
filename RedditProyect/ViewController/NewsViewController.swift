@@ -11,11 +11,13 @@ class NewsViewController: UIViewController {
     private var news: [New] = []
     private var start = 10
     
-//    private lazy var removeAllButton: UIButton = {
-//        let button = UIButton()
-//        button.addTarget(self, action: #selector(removeAllTapped), for: .touchUpInside)
-//        return button
-//    }()
+    private lazy var dismissAllButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(dismissAllTapped), for: .touchUpInside)
+        button.setTitle("Dismiss all", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        return button
+    }()
     
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -52,12 +54,19 @@ class NewsViewController: UIViewController {
         
         refreshControl.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        dismissAllButton.translatesAutoresizingMaskIntoConstraints = false
         
+        self.view.addSubview(dismissAllButton)
         self.view.addSubview(tableView)
         tableView.addSubview(refreshControl)
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            dismissAllButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            dismissAllButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            dismissAllButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            dismissAllButton.heightAnchor.constraint(equalToConstant: 25),
+            
+            tableView.topAnchor.constraint(equalTo: self.dismissAllButton.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
@@ -95,7 +104,7 @@ class NewsViewController: UIViewController {
                     }
                 }
             case .failure(let error):
-                //TODO: handle error
+                self.handleFailure(error)
                 break
             }
         }, limit: String(limit), pagination: pagination)
@@ -103,7 +112,16 @@ class NewsViewController: UIViewController {
     
     @objc func pullToRefresh() {
         refreshControl.endRefreshing()
+        start = 10
         getNews(pagination: false, limit: start)
+    }
+    
+    @objc func dismissAllTapped() {
+        news = []
+        UIView.transition(with: tableView,
+                          duration: 0.35,
+                          options: .transitionCrossDissolve,
+                          animations: { self.tableView.reloadData() })
     }
 }
 
@@ -133,6 +151,8 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+
         let newDetailViewController = NewDetailViewController()
         
         let new = news[indexPath.row]

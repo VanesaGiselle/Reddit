@@ -101,15 +101,17 @@ class NewTableViewCell: UITableViewCell {
     
     private func showThumbnail(viewModel: ViewModel) {
         guard let url = viewModel.thumbnail else {
+            NSLayoutConstraint.activate([self.withoutThumbnailConstraint])
+            NSLayoutConstraint.deactivate(self.thumbnailConstraints)
             return
         }
-        
-        NSLayoutConstraint.activate(self.thumbnailConstraints)
-        NSLayoutConstraint.deactivate([self.withoutThumbnailConstraint])
         
         let id = viewModel.id
         thumbnailImageView.download(from: url, completionHandler: { image in
             if id == viewModel.id {
+                NSLayoutConstraint.activate(self.thumbnailConstraints)
+                NSLayoutConstraint.deactivate([self.withoutThumbnailConstraint])
+                
                 UIImageView.transition(with: self.thumbnailImageView, duration: 0.5, options: [.curveEaseOut, .transitionCrossDissolve], animations: {
                     self.thumbnailImageView.image = image
                     self.thumbnailImageView.clipsToBounds = true
@@ -118,6 +120,8 @@ class NewTableViewCell: UITableViewCell {
                 NSLayoutConstraint.activate([self.withoutThumbnailConstraint])
                 NSLayoutConstraint.deactivate(self.thumbnailConstraints)
             }
+        }, failure: {                 NSLayoutConstraint.activate([self.withoutThumbnailConstraint])
+            NSLayoutConstraint.deactivate(self.thumbnailConstraints)
         })
     }
     
@@ -140,7 +144,7 @@ class NewTableViewCell: UITableViewCell {
         self.contentView.addSubview(commentImageView)
         self.contentView.addSubview(numCommentsLabel)
         self.contentView.addSubview(readStatusLabel)
-
+        
         NSLayoutConstraint.activate([self.withoutThumbnailConstraint])
         NSLayoutConstraint.deactivate(self.thumbnailConstraints)
         

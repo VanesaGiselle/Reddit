@@ -34,7 +34,7 @@ extension UIImageView {
         }.resume()
     }
     
-    func downloaded(from url: URL, contentMode mode: ContentMode = .scaleAspectFill, completionHandler: ((UIImage) -> ())?) {
+    func downloaded(from url: URL, contentMode mode: ContentMode = .scaleAspectFill, completionHandler: ((UIImage) -> ())?, failure: (() -> ())? = nil) {
         contentMode = mode
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard
@@ -42,7 +42,14 @@ extension UIImageView {
                 let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
                 let data = data, error == nil,
                 let image = UIImage(data: data)
-                else { return }
+                else {
+                DispatchQueue.main.async {
+                    if let failure = failure {
+                        failure()
+                    }
+                }
+                return
+            }
             DispatchQueue.main.async() { [weak self] in
                 if let completionHandler = completionHandler {
                     completionHandler(image)
@@ -56,8 +63,8 @@ extension UIImageView {
         }.resume()
     }
     
-    func download(from link: String, contentMode mode: ContentMode = .scaleAspectFill, completionHandler: ((UIImage) -> ())? = nil) {
+    func download(from link: String, contentMode mode: ContentMode = .scaleAspectFill, completionHandler: ((UIImage) -> ())? = nil, failure: (() -> ())? = nil) {
         guard let url = URL(string: link) else { return }
-        downloaded(from: url, contentMode: mode, completionHandler: completionHandler)
+        downloaded(from: url, contentMode: mode, completionHandler: completionHandler, failure: failure)
     }
 }

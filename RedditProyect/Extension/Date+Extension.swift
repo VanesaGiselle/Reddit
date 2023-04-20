@@ -8,6 +8,14 @@
 import Foundation
 
 extension Date {
+    static func random(in range: Range<Date>) -> Date {
+        Date(
+            timeIntervalSinceNow: .random(
+                in: range.lowerBound.timeIntervalSinceNow...range.upperBound.timeIntervalSinceNow
+            )
+        )
+    }
+    
     static func - (recent: Date, previous: Date) -> (year: Int?, month: Int?, week: Int?, day: Int?, hour: Int?, minute: Int?, second: Int?) {
         let year = Calendar.current.dateComponents([.year], from: previous, to: recent).year
         let day = Calendar.current.dateComponents([.day], from: previous, to: recent).day
@@ -18,12 +26,6 @@ extension Date {
         let second = Calendar.current.dateComponents([.second], from: previous, to: recent).second
 
         return (year: year, month: month, week: week, day: day, hour: hour, minute: minute, second: second)
-    }
-    
-    func toString() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "y-m-d HH:mm:ss"
-        return formatter.string(from: self)
     }
     
     func getDateInterval(interval: (year: Int?, month: Int?, week: Int?, day: Int?, hour: Int?, minute: Int?, second: Int?)) -> String {

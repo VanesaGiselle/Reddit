@@ -28,23 +28,12 @@ class New: Equatable {
     
     // Random date was created because API is deprecated and don't have dates.
     lazy var date: Date = {
-        let date = Date()
-        let calendar = Calendar.current
-        var dateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
-        guard
-            let days = calendar.range(of: .day, in: .year, for: date),
-            let randomDay = days.randomElement(),
-            let hours = calendar.range(of: .hour, in: .day, for: date),
-            let randomHour = hours.randomElement(),
-            let minutes = calendar.range(of: .minute, in: .hour, for: date),
-            let randomMinute = minutes.randomElement()
-        else {
+        let currentDate = Date()
+        let backDate = Calendar.current.date(byAdding: .year, value: -10, to: Date())
+        guard let backDate = backDate else {
             return Date()
         }
-        dateComponents.setValue(randomDay, for: .day)
-        dateComponents.setValue(randomHour, for: .hour)
-        dateComponents.setValue(randomMinute, for: .hour)
-        return calendar.date(from: dateComponents) ?? Date()
+        return Date.random(in: backDate..<currentDate)
     }()
     
     init(id: String, thumbnail: String?, title: String, author: String, numComments: Int) {

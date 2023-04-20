@@ -30,7 +30,7 @@ class HttpConnector {
         return components.url
     }
     
-    private func request<T: Decodable>(completionHandler: @escaping(Result<T, ErrorHandler>) -> Void, httpMethod: HttpMethod, queryParamsDict: [String: String]?, pathEntity: String) {
+    private func request<T: Decodable>(completionHandler: @escaping(Result<T, ErrorType>) -> Void, httpMethod: HttpMethod, queryParamsDict: [String: String]?, pathEntity: String) {
         
         guard let url = createUrl(queryItems: queryParamsDict, pathEntity: pathEntity) else {
             DispatchQueue.main.async {
@@ -94,7 +94,7 @@ class HttpConnector {
     
     //MARK: - GET
     
-    func getNews(completionHandler: @escaping(Result<News, ErrorHandler>) -> Void, limit: String?, pagination: Bool = false) {
+    func getNews(completionHandler: @escaping(Result<News, ErrorType>) -> Void, limit: String?, pagination: Bool = false) {
         if pagination {
             isPagination = true
         }
