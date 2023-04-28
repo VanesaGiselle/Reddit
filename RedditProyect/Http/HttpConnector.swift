@@ -7,9 +7,7 @@
 
 import UIKit
 
-class HttpConnector {
-    var isPagination: Bool = false
-    
+class HttpConnector: NewsProvider {
     private func createComponents() -> URLComponents {
         var components = URLComponents()
         components.scheme = "https"
@@ -94,14 +92,9 @@ class HttpConnector {
     
     //MARK: - GET
     
-    func getNews(completionHandler: @escaping(Result<News, ErrorType>) -> Void, limit: String?, pagination: Bool = false) {
-        if pagination {
-            isPagination = true
-        }
+    func getNews(completionHandler: @escaping(Result<News, ErrorType>) -> Void, limit: String?) {
         let queryParams = ["limit": limit].compactMapValues({ $0 })
-        DispatchQueue.global().asyncAfter(deadline: .now() + (pagination ? 3 : 2), execute: {
-            self.request(completionHandler: completionHandler, httpMethod: .get, queryParamsDict: queryParams, pathEntity: "top.json")
-        })
+        self.request(completionHandler: completionHandler, httpMethod: .get, queryParamsDict: queryParams, pathEntity: "top.json")
     }
 }
 

@@ -9,7 +9,6 @@ import UIKit
 
 class NewsViewController: UIViewController {
     private var news: [New] = []
-    private var start = 10
     
     private lazy var dismissAllButton: UIButton = {
         let button = UIButton()
@@ -30,13 +29,39 @@ class NewsViewController: UIViewController {
         tableView.register(NewTableViewCell.self, forCellReuseIdentifier: NewTableViewCell.reuseIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 50
         return tableView
+    }()
+    
+    private lazy var pagination: Pagination = {
+        let pagination = Pagination()
+        pagination.onGotNewsForFirstTime = {[weak self] in
+            self?.tableView.reloadData()
+        }
+        
+        pagination.newsProvider = HttpConnector()
+        return pagination
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getNews(pagination: false, limit: start)
+        getFirstPage()
         setup()
+    }
+    
+    private func getFirstPage() {
+        pagination.getFirstPage(onGotNews: { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let news):
+                self.news = news
+                self.tableView.reloadData()
+            case .failure(let error):
+                self.handleFailure(error)
+                break
+            }
+        })
     }
     
     private func createFooter() -> UIView {
@@ -73,51 +98,14 @@ class NewsViewController: UIViewController {
         ])
     }
     
-    private func getNews(pagination: Bool, limit: Int) {
-        HttpConnector().getNews(completionHandler: { [weak self] result in
-            guard let self = self else { return }
-            self.tableView.tableFooterView = nil
-
-            if pagination {
-                HttpConnector().isPagination = false
-            }
-            switch result {
-            case .success(let apiData):
-                for new in apiData.data.children {
-                    self.news.append(New(id: new.data.id, thumbnail: new.data.thumbnail, title: new.data.title, author: new.data.author, numComments: new.data.numComments))
-                }
-                self.news = self.news.getUniqueElements()
-                if limit == 10 {
-                    self.tableView.reloadData()
-                } else {
-                    DispatchQueue.main.async {
-                        var indexPaths: [IndexPath] = []
-
-                        for i in self.start - 10 ..< self.news.count {
-                            indexPaths.append(IndexPath(row: i - 1, section: 0))
-                        }
-                        
-                        self.tableView.performBatchUpdates({
-                            self.tableView.insertRows(at: indexPaths
-                            , with: .bottom)
-                           }, completion: nil)
-                    }
-                }
-            case .failure(let error):
-                self.handleFailure(error)
-                break
-            }
-        }, limit: String(limit), pagination: pagination)
-    }
-    
     @objc func pullToRefresh() {
         refreshControl.endRefreshing()
-        start = 10
-        getNews(pagination: false, limit: start)
+        getFirstPage()
     }
     
     @objc func dismissAllTapped() {
         news = []
+        
         UIView.transition(with: tableView,
                           duration: 0.35,
                           options: .transitionCrossDissolve,
@@ -145,7 +133,11 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
             numComments: new.numComments,
             read: new.read
         )
-        
+        tableViewCell.onUpdatedImage = {
+            self.tableView.beginUpdates()
+            self.tableView.setNeedsDisplay()
+            self.tableView.endUpdates()
+        }
         tableViewCell.render(viewModel: viewModel)
         return tableViewCell
     }
@@ -168,7 +160,9 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
         
         self.navigationController?.pushViewController(newDetailViewController, animated: true)
     }
-    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
       if editingStyle == .delete {
         self.news.remove(at: indexPath.row)
@@ -180,12 +174,78 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
         let position = scrollView.contentOffset.y
         
         if position > tableView.contentSize.height - 100 - scrollView.frame.size.height {
-            guard !HttpConnector().isPagination else {
-                return
-            }
             self.tableView.tableFooterView = createFooter()
-            start = start + 10
-            getNews(pagination: true, limit: start)
+            
+            pagination.getNextPage(onGotNews: { [weak self] result, addedNews in
+                guard let self = self else { return }
+                switch result {
+                case .success(let news):
+                    self.news = news
+                    
+                    var indexPaths: [IndexPath] = []
+                    for i in (self.news.count - addedNews) ..< self.news.count {
+                        indexPaths.append(IndexPath(row: i - 1, section: 0))
+                    }
+                    self.tableView.performBatchUpdates({
+                        self.tableView.insertRows(at: indexPaths
+                                                  , with: .bottom)
+                    }, completion: nil)
+                    
+                case .failure(let error):
+                    self.handleFailure(error)
+                    break
+                }
+            })
+            self.tableView.tableFooterView = nil
         }
     }
+}
+
+class Pagination {
+    private var newsCount = 0
+    private let pageSize = 10
+    private var pageSizeInclundingCurrentNews: Int {
+        pageSize + newsCount
+    }
+    var newsProvider: NewsProvider?
+    var onGotNewsForFirstTime: (()->())?
+    
+    init() {}
+
+    func getFirstPage(onGotNews: @escaping(Result<[New], ErrorType>) -> Void) {
+        newsCount = 0
+        getNextPage(onGotNews: { result, addedNews in
+            onGotNews(result)
+        })
+    }
+    
+    internal func convertApiNewsToUniqueNews(apiNews: News) -> [New] {
+        var news: [New] = []
+        for new in apiNews.data.children {
+            news.append(New(id: new.data.id, thumbnail: new.data.thumbnail, title: new.data.title, author: new.data.author, numComments: new.data.numComments))
+        }
+        return news.getUniqueElements()
+    }
+    
+    func getNextPage(onGotNews: @escaping(Result<[New], ErrorType>, Int) -> Void) {
+        newsProvider?.getNews(completionHandler: { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let apiData):
+                let newNews = self.convertApiNewsToUniqueNews(apiNews: apiData)
+                let addedNews = newNews.count - self.newsCount
+                self.newsCount = newNews.count
+                onGotNews(.success(newNews), addedNews)
+            case .failure(let error):
+                onGotNews(.failure(error), 0)
+                break
+            }
+            
+        }, limit: String(pageSizeInclundingCurrentNews))
+    }
+}
+
+protocol NewsProvider {
+    func getNews(completionHandler: @escaping(Result<News, ErrorType>) -> Void, limit: String?)
 }

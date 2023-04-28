@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		935CDF7429F325B90010F6FB /* PaginationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935CDF7329F325B90010F6FB /* PaginationTests.swift */; };
 		D578020129EE2E9700A60E80 /* ArrayExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D578020029EE2E9700A60E80 /* ArrayExtensionTests.swift */; };
 		D578020329EE337F00A60E80 /* DateExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D578020229EE337F00A60E80 /* DateExtensionTests.swift */; };
 		D578020529EF0A3000A60E80 /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D578020429EF0A3000A60E80 /* ErrorManager.swift */; };
@@ -52,6 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		935CDF7329F325B90010F6FB /* PaginationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationTests.swift; sourceTree = "<group>"; };
 		D578020029EE2E9700A60E80 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
 		D578020229EE337F00A60E80 /* DateExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensionTests.swift; sourceTree = "<group>"; };
 		D578020429EF0A3000A60E80 /* ErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				D5A8A50929E05E84004729EF /* RedditProyectTests.swift */,
 				D578020029EE2E9700A60E80 /* ArrayExtensionTests.swift */,
 				D578020229EE337F00A60E80 /* DateExtensionTests.swift */,
+				935CDF7329F325B90010F6FB /* PaginationTests.swift */,
 			);
 			path = RedditProyectTests;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5A8A50A29E05E84004729EF /* RedditProyectTests.swift in Sources */,
+				935CDF7429F325B90010F6FB /* PaginationTests.swift in Sources */,
 				D578020329EE337F00A60E80 /* DateExtensionTests.swift in Sources */,
 				D578020129EE2E9700A60E80 /* ArrayExtensionTests.swift in Sources */,
 			);
@@ -478,7 +482,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -532,7 +536,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

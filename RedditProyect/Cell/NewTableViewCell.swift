@@ -27,11 +27,12 @@ class NewTableViewCell: UITableViewCell {
         thumbnailImageView.heightAnchor.constraint(equalToConstant: 200),
         numCommentsLabel.topAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor, constant: 20),
     ]
-    
-    private lazy var withoutThumbnailConstraint =                         numCommentsLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20)
+    var onUpdatedImage: (()->())?
+    private lazy var withoutThumbnailConstraint = numCommentsLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20)
     
     private lazy var authorLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
         label.font = label.font.withSize(12)
         return label
     }()
@@ -40,6 +41,7 @@ class NewTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = label.font.withSize(12)
         label.textColor = .gray
+        label.numberOfLines = 0
         label.textAlignment = .left
         return label
     }()
@@ -65,6 +67,7 @@ class NewTableViewCell: UITableViewCell {
     
     private lazy var numCommentsLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
         label.textColor = .gray
         label.font = UIFont.boldSystemFont(ofSize: 14)
         return label
@@ -73,6 +76,7 @@ class NewTableViewCell: UITableViewCell {
     private lazy var readStatusLabel: UILabel = {
         let label = UILabel()
         label.textColor = .gray
+        label.numberOfLines = 0
         label.textAlignment = .right
         label.font = UIFont.boldSystemFont(ofSize: 14)
         return label
@@ -88,9 +92,7 @@ class NewTableViewCell: UITableViewCell {
     }
     
     func render(viewModel: ViewModel) {
-        if viewModel.thumbnail != nil {
-            showThumbnail(viewModel: viewModel)
-        }
+        showThumbnail(viewModel: viewModel)
         commentImageView.image = UIImage(named: "comment")
         titleLabel.text = viewModel.title
         authorLabel.text = viewModel.author
@@ -101,32 +103,38 @@ class NewTableViewCell: UITableViewCell {
     
     private func showThumbnail(viewModel: ViewModel) {
         guard let url = viewModel.thumbnail else {
-            NSLayoutConstraint.activate([self.withoutThumbnailConstraint])
             NSLayoutConstraint.deactivate(self.thumbnailConstraints)
+            NSLayoutConstraint.activate([self.withoutThumbnailConstraint])
             return
         }
-        
         let id = viewModel.id
         thumbnailImageView.download(from: url, completionHandler: { image in
             if id == viewModel.id {
-                NSLayoutConstraint.activate(self.thumbnailConstraints)
+                self.thumbnailImageView.isHidden = false
                 NSLayoutConstraint.deactivate([self.withoutThumbnailConstraint])
-                
+                NSLayoutConstraint.activate(self.thumbnailConstraints)
                 UIImageView.transition(with: self.thumbnailImageView, duration: 0.5, options: [.curveEaseOut, .transitionCrossDissolve], animations: {
                     self.thumbnailImageView.image = image
                     self.thumbnailImageView.clipsToBounds = true
                 })
-            } else {
-                NSLayoutConstraint.activate([self.withoutThumbnailConstraint])
-                NSLayoutConstraint.deactivate(self.thumbnailConstraints)
+                self.onUpdatedImage?()
             }
-        }, failure: {                 NSLayoutConstraint.activate([self.withoutThumbnailConstraint])
+        }, failure: { [weak self] in
+            guard let self = self else { return }
             NSLayoutConstraint.deactivate(self.thumbnailConstraints)
+            NSLayoutConstraint.activate([self.withoutThumbnailConstraint])
+            self.thumbnailImageView.isHidden = true
+            self.onUpdatedImage?()
         })
     }
     
     private func setup() {
         authorLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        authorLabel.setContentHuggingPriority(.required, for: .vertical)
+        authorLabel.setContentCompressionResistancePriority(.required, for: .vertical)
+        titleLabel.setContentHuggingPriority(.required, for: .vertical)
+        numCommentsLabel.setContentHuggingPriority(.required, for: .vertical)
+        readStatusLabel.setContentHuggingPriority(.required, for: .vertical)
         numCommentsLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         authorLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -144,9 +152,8 @@ class NewTableViewCell: UITableViewCell {
         self.contentView.addSubview(commentImageView)
         self.contentView.addSubview(numCommentsLabel)
         self.contentView.addSubview(readStatusLabel)
-        
+        thumbnailImageView.isHidden = true
         NSLayoutConstraint.activate([self.withoutThumbnailConstraint])
-        NSLayoutConstraint.deactivate(self.thumbnailConstraints)
         
         NSLayoutConstraint.activate([
             authorLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 20),
