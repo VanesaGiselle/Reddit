@@ -39,10 +39,31 @@ class NewsViewController: UIViewController {
         pagination.onGotNewsForFirstTime = {[weak self] in
             self?.tableView.reloadData()
         }
-        
-        pagination.newsProvider = HttpConnector()
+//        pagination.newsProvider = HttpConnector()
+//        pagination.newsProvider = FixedNewsProvider(error: .urlError)
+        pagination.newsProvider = FixedNewsProvider(news: [
+            New(id: "1", thumbnail: nil, title: "without image", author: "lala", numComments: 10),
+            New(id: "2", thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwvme8koLiePzlG983xz4tACOt3eyV6xwc0LfoAw33TLKWzvT3bGsbxZvPnXWFFAU5EIU&usqp=CAU", title: "with", author: "lala", numComments: 10),
+            New(id: "3", thumbnail: "hps://encrypted-tbn0.gstatic.com/images?q=tbn:AN", title: "bad url", author: "lala", numComments: 10),
+            New(id: "4", thumbnail: "hps://encrypted-tbn0.gstatic.com/images?q=tbn:AN", title: "🙃", author: "with emoji", numComments: 10),
+            New(id: "5", thumbnail: "hps://encrypted-tbn0.gstatic.com/images?q=tbn:AN", title: "a\n\n\n\n\n\n\n\n\nb\n\n\n\n\n\n\n\n\nc asdlkjfhlaskjdfhaksjf", author: "with emoji", numComments: 10),
+            New(id: "6", thumbnail: nil, title: "lonng kfhgaslkjdfh aksljdhf ljkadshf ljkasdhfjk ahsdkj fhaklsjdfh ajklsdf a sdlkhflaksjdfh klajsdhf lkajsdfhjk asldkfhj lkajsdhf kasdhfk jadhslkfjhasdk jfhasdkljf hasdjklhf lkasdjhf laksdjh ", author: "lala", numComments: 0)
+        ])
+//        pagination.newsProvider = FixedNewsProvider(news: [
+//            New(id: "1", thumbnail: nil, title: "short", author: "lala", numComments: 10),
+//            New(id: "2", thumbnail: nil, title: "lonng kfhgaslkjdfh aksljdhf ljkadshf ljkasdhfjk ahsdkj ", author: "lala", numComments: 0),
+//            New(id: "3", thumbnail: nil, title: "lonng kfhgaslkjdfh aksljdhf ljkadshf ljkasdhfjk ahsdkj fhaklsjdfh ajklsdf a sdlkhflaksjdfh klajsdhf lkajsdfhjk asldkfhj lkajsdhf kasdhfk jadhslkfjhasdk jfhasdkljf hasdjklhf lkasdjhf laksdjh ", author: "lala", numComments: 0)
+//        ])// HttpConnector()
         return pagination
     }()
+    
+    // FIRST
+    // FAST
+    // INDEPENDIENT
+    // REPEATEABLE
+    // Self Verifing
+    // Timely
+    // https://medium.com/pragmatic-programmers/unit-tests-are-first-fast-isolated-repeatable-self-verifying-and-timely-a83e8070698e
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -219,24 +240,16 @@ class Pagination {
         })
     }
     
-    internal func convertApiNewsToUniqueNews(apiNews: News) -> [New] {
-        var news: [New] = []
-        for new in apiNews.data.children {
-            news.append(New(id: new.data.id, thumbnail: new.data.thumbnail, title: new.data.title, author: new.data.author, numComments: new.data.numComments))
-        }
-        return news.getUniqueElements()
-    }
-    
     func getNextPage(onGotNews: @escaping(Result<[New], ErrorType>, Int) -> Void) {
         newsProvider?.getNews(completionHandler: { [weak self] result in
             guard let self = self else { return }
             
             switch result {
-            case .success(let apiData):
-                let newNews = self.convertApiNewsToUniqueNews(apiNews: apiData)
+            case .success(let newNews):
                 let addedNews = newNews.count - self.newsCount
                 self.newsCount = newNews.count
                 onGotNews(.success(newNews), addedNews)
+                break
             case .failure(let error):
                 onGotNews(.failure(error), 0)
                 break
@@ -247,5 +260,19 @@ class Pagination {
 }
 
 protocol NewsProvider {
-    func getNews(completionHandler: @escaping(Result<News, ErrorType>) -> Void, limit: String?)
+    func getNews(completionHandler: @escaping(Result<[New], ErrorType>) -> Void, limit: String?)
+}
+
+class FixedNewsProvider: NewsProvider {
+    private let result: Result<[New], ErrorType>
+    init(news: [New]) {
+        self.result = .success(news)
+    }
+    
+    init(error: ErrorType) {
+        self.result = .failure(error)
+    }
+    func getNews(completionHandler: @escaping (Result<[New], ErrorType>) -> Void, limit: String?) {
+        completionHandler(result)
+    }
 }

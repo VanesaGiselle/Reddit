@@ -92,9 +92,25 @@ class HttpConnector: NewsProvider {
     
     //MARK: - GET
     
-    func getNews(completionHandler: @escaping(Result<News, ErrorType>) -> Void, limit: String?) {
+    func getNews(completionHandler: @escaping(Result<[New], ErrorType>) -> Void, limit: String?) {
         let queryParams = ["limit": limit].compactMapValues({ $0 })
-        self.request(completionHandler: completionHandler, httpMethod: .get, queryParamsDict: queryParams, pathEntity: "top.json")
+        self.request(completionHandler: { (result: Result<NewsResponseFromAPI, ErrorType>) in
+            switch result {
+            case .success(let response):
+                let news = self.convertApiNewsToUniqueNews(apiNews: response)
+                completionHandler(.success(news))
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+        }, httpMethod: .get, queryParamsDict: queryParams, pathEntity: "top.json")
+    }
+    
+    internal func convertApiNewsToUniqueNews(apiNews: NewsResponseFromAPI) -> [New] {
+        var news: [New] = []
+        for new in apiNews.data.children {
+            news.append(New(id: new.data.id, thumbnail: new.data.thumbnail, title: new.data.title, author: new.data.author, numComments: new.data.numComments))
+        }
+        return news.getUniqueElements()
     }
 }
 
