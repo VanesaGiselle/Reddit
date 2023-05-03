@@ -41,6 +41,8 @@ class NewsViewController: UIViewController {
         }
         
         pagination.newsProvider = HttpConnector()
+//        pagination.newsProvider = FixedNewsProvider()
+
         return pagination
     }()
     
@@ -199,53 +201,4 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
             self.tableView.tableFooterView = nil
         }
     }
-}
-
-class Pagination {
-    private var newsCount = 0
-    private let pageSize = 10
-    private var pageSizeInclundingCurrentNews: Int {
-        pageSize + newsCount
-    }
-    var newsProvider: NewsProvider?
-    var onGotNewsForFirstTime: (()->())?
-    
-    init() {}
-
-    func getFirstPage(onGotNews: @escaping(Result<[New], ErrorType>) -> Void) {
-        newsCount = 0
-        getNextPage(onGotNews: { result, addedNews in
-            onGotNews(result)
-        })
-    }
-    
-    internal func convertApiNewsToUniqueNews(apiNews: News) -> [New] {
-        var news: [New] = []
-        for new in apiNews.data.children {
-            news.append(New(id: new.data.id, thumbnail: new.data.thumbnail, title: new.data.title, author: new.data.author, numComments: new.data.numComments))
-        }
-        return news.getUniqueElements()
-    }
-    
-    func getNextPage(onGotNews: @escaping(Result<[New], ErrorType>, Int) -> Void) {
-        newsProvider?.getNews(completionHandler: { [weak self] result in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let apiData):
-                let newNews = self.convertApiNewsToUniqueNews(apiNews: apiData)
-                let addedNews = newNews.count - self.newsCount
-                self.newsCount = newNews.count
-                onGotNews(.success(newNews), addedNews)
-            case .failure(let error):
-                onGotNews(.failure(error), 0)
-                break
-            }
-            
-        }, limit: String(pageSizeInclundingCurrentNews))
-    }
-}
-
-protocol NewsProvider {
-    func getNews(completionHandler: @escaping(Result<News, ErrorType>) -> Void, limit: String?)
 }

@@ -28,7 +28,7 @@ class HttpConnector: NewsProvider {
         return components.url
     }
     
-    private func request<T: Decodable>(completionHandler: @escaping(Result<T, ErrorType>) -> Void, httpMethod: HttpMethod, queryParamsDict: [String: String]?, pathEntity: String) {
+    private func request<T: Decodable>(completionHandler: @escaping(Result<T, NetworkingError>) -> Void, httpMethod: HttpMethod, queryParamsDict: [String: String]?, pathEntity: String) {
         
         guard let url = createUrl(queryItems: queryParamsDict, pathEntity: pathEntity) else {
             DispatchQueue.main.async {
@@ -92,9 +92,47 @@ class HttpConnector: NewsProvider {
     
     //MARK: - GET
     
-    func getNews(completionHandler: @escaping(Result<News, ErrorType>) -> Void, limit: String?) {
+    func getNews(completionHandler: @escaping(Result<[New], ErrorType>) -> Void, limit: String?) {
         let queryParams = ["limit": limit].compactMapValues({ $0 })
-        self.request(completionHandler: completionHandler, httpMethod: .get, queryParamsDict: queryParams, pathEntity: "top.json")
+        
+        let completion = { (result: Result<NewsResponseFromApi, NetworkingError>) in
+            
+            switch result {
+            case .success(let newsResponseFromApi):
+                let news: [New] = self.convertApiNewsToUniqueNews(apiNews: newsResponseFromApi)
+                completionHandler(.success(news))
+            case .failure(let error):
+                //To show which is the especific error.
+                debugPrint(error)
+                
+                let errorType: ErrorType
+                
+                switch error {
+                case .noInternetError:
+                    errorType = .noInternetConnection
+                case .urlError:
+                    errorType = .serverNotFound
+                case .httpError:
+                    errorType = .serverNotFound
+                case .dataError:
+                    errorType = .serverNotFound
+                case .parseError:
+                    errorType = .serverNotFound
+                }
+                
+                completionHandler(.failure(errorType))
+            }
+        }
+        
+        self.request(completionHandler: completion, httpMethod: .get, queryParamsDict: queryParams, pathEntity: "top.json")
+    }
+    
+    internal func convertApiNewsToUniqueNews(apiNews: NewsResponseFromApi) -> [New] {
+        var news: [New] = []
+        for new in apiNews.data.children {
+            news.append(New(id: new.data.id, thumbnail: new.data.thumbnail, title: new.data.title, author: new.data.author, numComments: new.data.numComments))
+        }
+        return news.getUniqueElements()
     }
 }
 
