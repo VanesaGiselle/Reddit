@@ -13,8 +13,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let newsViewController = NewsViewController()
-        let principalNavigationController = UINavigationController(rootViewController: newsViewController)
+
+//        Root: News
+//        let rootViewController = NewsViewController()
+
+//        Root: Weather
+        let rootViewController = WeatherViewController()
+        
+        let principalNavigationController = UINavigationController(rootViewController: rootViewController)
+
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = principalNavigationController
         window?.makeKeyAndVisible()

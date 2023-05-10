@@ -10,10 +10,6 @@ import XCTest
 
 class PaginationTests: XCTestCase {
     func testTwoEqualElements_ShouldReturnJustOne() {
-        var pagination = Pagination()
-        pagination.newsProvider = MockNewsProvider()
-//        pagination.getFirstPage { Result<[New], ErrorType> in
-//        }
     }
     
     func testAllDifferentElements_ShouldReturnTheSame() {
@@ -28,22 +24,3 @@ class PaginationTests: XCTestCase {
         XCTAssertEqual(array.getUniqueElements(), expected)
     }
 }
-
-//class MockNewsProvider: NewsProvider {
-//    func getNews(completionHandler: @escaping (Result<News, ErrorType>) -> Void, limit: String?) {
-//        completionHandler(.success(
-//            News(
-//                data: Reddit.Data(children: [
-//                    New(id: "1", thumbnail: "", title: "title1", author: "author1", numComments: 5),
-//                    New(id: "2", thumbnail: "", title: "title1", author: "author1", numComments: 5),
-//                    New(id: "3", thumbnail: "", title: "title1", author: "author1", numComments: 5),
-//                    New(id: "4", thumbnail: "", title: "title1", author: "author1", numComments: 5),
-//                    New(id: "1", thumbnail: "", title: "title1", author: "author1", numComments: 5)
-//                ]
-//                                        )
-//
-//                )
-//            )
-//        )
-//                          }
-//}

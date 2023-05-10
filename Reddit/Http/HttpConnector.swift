@@ -7,16 +7,16 @@
 
 import UIKit
 
-class HttpConnector: NewsProvider {
-    private func createComponents() -> URLComponents {
+class HttpConnector: NewsProvider, WeatherProvider {
+    private func createComponents(baseUrl: BaseUrl) -> URLComponents {
         var components = URLComponents()
         components.scheme = "https"
-        components.host = "reddit.com"
+        components.host = baseUrl.rawValue
         return components
     }
     
-    private func createUrl(queryItems: [String: String]?, pathEntity: String) -> URL? {
-        var components = createComponents()
+    private func createUrl(baseUrl: BaseUrl, queryItems: [String: String]?, pathEntity: String) -> URL? {
+        var components = createComponents(baseUrl: baseUrl)
         components.path = "/\(pathEntity)"
         
         guard let queryItems = queryItems else {
@@ -28,9 +28,9 @@ class HttpConnector: NewsProvider {
         return components.url
     }
     
-    private func request<T: Decodable>(completionHandler: @escaping(Result<T, NetworkingError>) -> Void, httpMethod: HttpMethod, queryParamsDict: [String: String]?, pathEntity: String) {
+    private func request<T: Decodable>(completionHandler: @escaping(Result<T, NetworkingError>) -> Void, httpMethod: HttpMethod, baseUrl: BaseUrl, queryParamsDict: [String: String]?, pathEntity: String) {
         
-        guard let url = createUrl(queryItems: queryParamsDict, pathEntity: pathEntity) else {
+        guard let url = createUrl(baseUrl: baseUrl, queryItems: queryParamsDict, pathEntity: pathEntity) else {
             DispatchQueue.main.async {
                 completionHandler(.failure(.urlError))
             }
@@ -124,7 +124,27 @@ class HttpConnector: NewsProvider {
             }
         }
         
-        self.request(completionHandler: completion, httpMethod: .get, queryParamsDict: queryParams, pathEntity: "top.json")
+        self.request(completionHandler: completion, httpMethod: .get, baseUrl: .reddit, queryParamsDict: queryParams, pathEntity: "top.json")
+    }
+    
+    func getWeather(completionHandler: @escaping(Result<Weather, ErrorType>) -> Void, lat: String, lon: String) {
+        let appId = "69d2694e3ee76bd71b3c688d7ea1f30b"
+        let paths = "data/2.5/weather"
+        let queryParams = ["lat": lat, "lon": lon, "appId": appId].compactMapValues({ $0 })
+        
+        let completion = { (result: Result<WeatherResponseFromApi, NetworkingError>) in
+            
+            switch result {
+            case .success(let weatherResponseFromApi):
+                let weather: Weather = self.convertWeatherResponseFromApiToWeather(weatherResponseFromApi)
+                completionHandler(.success(weather))
+            case .failure(let error):
+                completionHandler(.failure(self.convertNetworkingErrorToErrorType(error)))
+            }
+        }
+        
+        self.request(completionHandler: completion, httpMethod: .get, baseUrl: .weather, queryParamsDict: queryParams, pathEntity: paths)
+
     }
     
     internal func convertApiNewsToUniqueNews(apiNews: NewsResponseFromApi) -> [New] {
@@ -133,6 +153,44 @@ class HttpConnector: NewsProvider {
             news.append(New(id: new.data.id, thumbnail: new.data.thumbnail, title: new.data.title, author: new.data.author, numComments: new.data.numComments))
         }
         return news.getUniqueElements()
+    }
+    
+    internal func convertWeatherResponseFromApiToWeather(_ weatherResponse: WeatherResponseFromApi) -> Weather {
+       
+        return Weather(id: weatherResponse.id,
+                       city: weatherResponse.name,
+                       visibility: weatherResponse.visibility,
+                       title: weatherResponse.weather.first?.main ?? "",
+                       description: weatherResponse.weather.first?.description ?? "",
+                       temp: weatherResponse.main.temp,
+                       feelsLike: weatherResponse.main.feelsLike,
+                       tempMin: weatherResponse.main.tempMin,
+                       tempMax: weatherResponse.main.tempMax,
+                       pressure: weatherResponse.main.pressure,
+                       humidity: weatherResponse.main.humidity
+        )
+    }
+    
+    internal func convertNetworkingErrorToErrorType(_ networkingError: NetworkingError) -> ErrorType {
+        //To show which is the especific error.
+        debugPrint(networkingError)
+        
+        let errorType: ErrorType
+        
+        switch networkingError {
+        case .noInternetError:
+            errorType = .noInternetConnection
+        case .urlError:
+            errorType = .serverNotFound
+        case .httpError:
+            errorType = .serverNotFound
+        case .dataError:
+            errorType = .serverNotFound
+        case .parseError:
+            errorType = .serverNotFound
+        }
+        
+        return errorType
     }
 }
 
