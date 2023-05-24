@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0DE8B3BE2A1E668D0050F54D /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE8B3BD2A1E668D0050F54D /* Networking.swift */; };
 		931C6B1F2A05BB1400ED32D5 /* BaseUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931C6B1E2A05BB1400ED32D5 /* BaseUrl.swift */; };
 		931C6B212A098B7000ED32D5 /* WeatherProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931C6B202A098B7000ED32D5 /* WeatherProvider.swift */; };
 		931C6B242A098BC200ED32D5 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931C6B232A098BC200ED32D5 /* Weather.swift */; };
@@ -32,7 +33,6 @@
 		D5A8A52529E0AC85004729EF /* HttpConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A52429E0AC85004729EF /* HttpConnector.swift */; };
 		D5A8A52729E0AE60004729EF /* NewsResponseFromApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A52629E0AE60004729EF /* NewsResponseFromApi.swift */; };
 		D5A8A53629E45CD6004729EF /* NetworkingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A53529E45CD6004729EF /* NetworkingError.swift */; };
-		D5A8A53829E45DF4004729EF /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A53729E45DF4004729EF /* HttpMethod.swift */; };
 		D5A8A53A29E48ADF004729EF /* New.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A53929E48ADF004729EF /* New.swift */; };
 		D5A8A54029E493E3004729EF /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A53F29E493E3004729EF /* UIImage+Extension.swift */; };
 		D5A8A54329E578F8004729EF /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A54229E578F8004729EF /* Date+Extension.swift */; };
@@ -59,6 +59,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0DE8B3BD2A1E668D0050F54D /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		931C6B1E2A05BB1400ED32D5 /* BaseUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUrl.swift; sourceTree = "<group>"; };
 		931C6B202A098B7000ED32D5 /* WeatherProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherProvider.swift; sourceTree = "<group>"; };
 		931C6B232A098BC200ED32D5 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
@@ -89,7 +90,6 @@
 		D5A8A52429E0AC85004729EF /* HttpConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpConnector.swift; sourceTree = "<group>"; };
 		D5A8A52629E0AE60004729EF /* NewsResponseFromApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsResponseFromApi.swift; sourceTree = "<group>"; };
 		D5A8A53529E45CD6004729EF /* NetworkingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingError.swift; sourceTree = "<group>"; };
-		D5A8A53729E45DF4004729EF /* HttpMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
 		D5A8A53929E48ADF004729EF /* New.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = New.swift; sourceTree = "<group>"; };
 		D5A8A53F29E493E3004729EF /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		D5A8A54229E578F8004729EF /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
@@ -123,6 +123,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0DDC07F12A17D17C00946C28 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				D5A8A4F629E05E83004729EF /* NewsViewController.swift */,
+				D5A8A54829E5D369004729EF /* NewDetailViewController.swift */,
+				935CDFBB29FF3DC30010F6FB /* NewsProvider.swift */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		0DDC07F22A17D17F00946C28 /* Weather */ = {
+			isa = PBXGroup;
+			children = (
+				931C6B202A098B7000ED32D5 /* WeatherProvider.swift */,
+				931C6B272A09DF6A00ED32D5 /* WeatherViewController.swift */,
+				931C6B2A2A0A705400ED32D5 /* FixedWeatherProvider.swift */,
+				935CDFBD29FF3DEE0010F6FB /* FixedNewsProvider.swift */,
+			);
+			path = Weather;
+			sourceTree = "<group>";
+		};
+		0DE8B3BC2A1E66870050F54D /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				0DE8B3BD2A1E668D0050F54D /* Networking.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		935CDFC32A014BA50010F6FB /* Error */ = {
 			isa = PBXGroup;
 			children = (
@@ -136,10 +165,6 @@
 			isa = PBXGroup;
 			children = (
 				935CDFBF2A00806A0010F6FB /* Pagination.swift */,
-				935CDFBB29FF3DC30010F6FB /* NewsProvider.swift */,
-				931C6B202A098B7000ED32D5 /* WeatherProvider.swift */,
-				935CDFBD29FF3DEE0010F6FB /* FixedNewsProvider.swift */,
-				931C6B2A2A0A705400ED32D5 /* FixedWeatherProvider.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -175,6 +200,7 @@
 		D5A8A4F129E05E83004729EF /* Reddit */ = {
 			isa = PBXGroup;
 			children = (
+				0DE8B3BC2A1E66870050F54D /* Networking */,
 				D5A8A4F229E05E83004729EF /* AppDelegate.swift */,
 				D5A8A54C29E6F77E004729EF /* UserConfiguration.swift */,
 				D5A8A54129E493EE004729EF /* Extension */,
@@ -240,7 +266,6 @@
 			children = (
 				D578020829EF11DB00A60E80 /* Error */,
 				D5A8A52829E45B65004729EF /* Model */,
-				D5A8A53729E45DF4004729EF /* HttpMethod.swift */,
 				931C6B1E2A05BB1400ED32D5 /* BaseUrl.swift */,
 				D5A8A52429E0AC85004729EF /* HttpConnector.swift */,
 			);
@@ -250,9 +275,8 @@
 		D5A8A53E29E48C14004729EF /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				D5A8A4F629E05E83004729EF /* NewsViewController.swift */,
-				931C6B272A09DF6A00ED32D5 /* WeatherViewController.swift */,
-				D5A8A54829E5D369004729EF /* NewDetailViewController.swift */,
+				0DDC07F22A17D17F00946C28 /* Weather */,
+				0DDC07F12A17D17C00946C28 /* News */,
 				935CDFC42A014FA80010F6FB /* Model */,
 				935CDFC32A014BA50010F6FB /* Error */,
 			);
@@ -403,12 +427,12 @@
 				D578020729EF0E3D00A60E80 /* UIViewController+Extension.swift in Sources */,
 				931C6B212A098B7000ED32D5 /* WeatherProvider.swift in Sources */,
 				D5A8A53A29E48ADF004729EF /* New.swift in Sources */,
+				0DE8B3BE2A1E668D0050F54D /* Networking.swift in Sources */,
 				D578020529EF0A3000A60E80 /* ErrorManager.swift in Sources */,
 				D5A8A54329E578F8004729EF /* Date+Extension.swift in Sources */,
 				D5A8A54929E5D369004729EF /* NewDetailViewController.swift in Sources */,
 				935CDFBC29FF3DC30010F6FB /* NewsProvider.swift in Sources */,
 				931C6B1F2A05BB1400ED32D5 /* BaseUrl.swift in Sources */,
-				D5A8A53829E45DF4004729EF /* HttpMethod.swift in Sources */,
 				D5A8A52329E0656C004729EF /* NewTableViewCell.swift in Sources */,
 				D5A8A55329EDD244004729EF /* Array+Extension.swift in Sources */,
 				935CDFBE29FF3DEE0010F6FB /* FixedNewsProvider.swift in Sources */,

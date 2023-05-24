@@ -15,10 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
 //        Root: News
-//        let rootViewController = NewsViewController()
+        let newsProvider = HTTPConnectorNewsProvider()
+        let networking1 = HTTPConnectorNetworking()
+        let networking2 = URLSessionNetworking()
+        let newsProvider2 = NetworkingNewsProvider(networking: networking2)
+        let rootViewController = NewsViewController(newsProvider: newsProvider2)
 
 //        Root: Weather
-        let rootViewController = WeatherViewController()
+//        let rootViewController = WeatherViewController()
         
         let principalNavigationController = UINavigationController(rootViewController: rootViewController)
 

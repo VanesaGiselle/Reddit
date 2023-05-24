@@ -7,7 +7,9 @@
 
 import Foundation
 
-enum BaseUrl: String {
-    case reddit = "reddit.com"
-    case weather = "api.openweathermap.org"
+struct BaseUrl {
+    var rawValue: String
+    
+    static let reddit = BaseUrl(rawValue: "reddit.com")
+    static let weather = BaseUrl(rawValue: "api.openweathermap.org")
 }
