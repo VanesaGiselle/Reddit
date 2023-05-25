@@ -58,6 +58,7 @@ class LoginVC: UIViewController {
     struct LoginJSONResponse: Decodable {}
 }
 
+// TODO: Agarrar los datos de user default. Llamar UserDefaultNewsProvider.
 class HTTPConnectorNewsProvider: NewsProvider {
     
     private let httpConnector: HttpConnector

@@ -46,7 +46,7 @@ protocol Networking {
 //
 //networking.send(...) { response.status == 200, JSONDecoder.decode() }
 
-
+// TODO: Cambiar a AlamofireConnectorNetworking
 class HTTPConnectorNetworking: Networking {
     private let httpConnector = HttpConnector()
     
