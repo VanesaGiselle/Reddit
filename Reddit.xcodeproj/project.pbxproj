@@ -7,6 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0DE8B3BE2A1E668D0050F54D /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE8B3BD2A1E668D0050F54D /* Networking.swift */; };
+		5D3D6DE9ABDA22F585D9A8D1 /* Pods_Reddit_RedditUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE5F4ACBCDEB791797A2D7A /* Pods_Reddit_RedditUITests.framework */; };
+		931C6B1F2A05BB1400ED32D5 /* BaseUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931C6B1E2A05BB1400ED32D5 /* BaseUrl.swift */; };
+		931C6B212A098B7000ED32D5 /* WeatherProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931C6B202A098B7000ED32D5 /* WeatherProvider.swift */; };
+		931C6B242A098BC200ED32D5 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931C6B232A098BC200ED32D5 /* Weather.swift */; };
+		931C6B262A09905000ED32D5 /* WeatherResponseFromApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931C6B252A09905000ED32D5 /* WeatherResponseFromApi.swift */; };
+		931C6B282A09DF6A00ED32D5 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931C6B272A09DF6A00ED32D5 /* WeatherViewController.swift */; };
+		931C6B2B2A0A705400ED32D5 /* FixedWeatherProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931C6B2A2A0A705400ED32D5 /* FixedWeatherProvider.swift */; };
+		9340583F2A1FDD610007DE84 /* NewsPersistenceConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9340583E2A1FDD610007DE84 /* NewsPersistenceConfiguration.swift */; };
+		934058422A1FDDAE0007DE84 /* NewsPersistenceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934058412A1FDDAE0007DE84 /* NewsPersistenceProvider.swift */; };
+		934058452A1FDE2B0007DE84 /* NetworkingNewsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934058442A1FDE2B0007DE84 /* NetworkingNewsProvider.swift */; };
+		934058472A1FDE430007DE84 /* NewPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934058462A1FDE430007DE84 /* NewPersistence.swift */; };
+		9340584A2A1FE2C20007DE84 /* CombineNetworkingPersistenceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934058492A1FE2C20007DE84 /* CombineNetworkingPersistenceProvider.swift */; };
+		934058E22A263FBA0007DE84 /* NetworkingWeatherProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934058E12A263FBA0007DE84 /* NetworkingWeatherProvider.swift */; };
+		934058E42A2644EC0007DE84 /* URLCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934058E32A2644EC0007DE84 /* URLCreator.swift */; };
+		934058E82A26471B0007DE84 /* AlamofireNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934058E72A26471B0007DE84 /* AlamofireNetworking.swift */; };
+		934058EA2A26474A0007DE84 /* URLSessionNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934058E92A26474A0007DE84 /* URLSessionNetworking.swift */; };
 		935CDF7429F325B90010F6FB /* PaginationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935CDF7329F325B90010F6FB /* PaginationTests.swift */; };
 		935CDFBC29FF3DC30010F6FB /* NewsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935CDFBB29FF3DC30010F6FB /* NewsProvider.swift */; };
 		935CDFBE29FF3DEE0010F6FB /* FixedNewsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935CDFBD29FF3DEE0010F6FB /* FixedNewsProvider.swift */; };
@@ -23,16 +40,17 @@
 		D5A8A51429E05E84004729EF /* RedditProyectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A51329E05E84004729EF /* RedditProyectUITests.swift */; };
 		D5A8A51629E05E84004729EF /* RedditProyectUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A51529E05E84004729EF /* RedditProyectUITestsLaunchTests.swift */; };
 		D5A8A52329E0656C004729EF /* NewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A52229E0656C004729EF /* NewTableViewCell.swift */; };
-		D5A8A52529E0AC85004729EF /* HttpConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A52429E0AC85004729EF /* HttpConnector.swift */; };
+		D5A8A52529E0AC85004729EF /* Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A52429E0AC85004729EF /* Comments.swift */; };
 		D5A8A52729E0AE60004729EF /* NewsResponseFromApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A52629E0AE60004729EF /* NewsResponseFromApi.swift */; };
 		D5A8A53629E45CD6004729EF /* NetworkingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A53529E45CD6004729EF /* NetworkingError.swift */; };
-		D5A8A53829E45DF4004729EF /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A53729E45DF4004729EF /* HttpMethod.swift */; };
 		D5A8A53A29E48ADF004729EF /* New.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A53929E48ADF004729EF /* New.swift */; };
 		D5A8A54029E493E3004729EF /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A53F29E493E3004729EF /* UIImage+Extension.swift */; };
 		D5A8A54329E578F8004729EF /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A54229E578F8004729EF /* Date+Extension.swift */; };
 		D5A8A54929E5D369004729EF /* NewDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A54829E5D369004729EF /* NewDetailViewController.swift */; };
 		D5A8A54D29E6F77E004729EF /* UserConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A54C29E6F77E004729EF /* UserConfiguration.swift */; };
 		D5A8A55329EDD244004729EF /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8A55229EDD244004729EF /* Array+Extension.swift */; };
+		DCC1F2B008E9AB72D085BF12 /* Pods_Reddit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D4410D723233A4CCEEF23D0 /* Pods_Reddit.framework */; };
+		FE415E074D447A5C6C2D4DCE /* Pods_RedditTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9BC86B3A6591FE4C717964 /* Pods_RedditTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,11 +71,37 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0DE8B3BD2A1E668D0050F54D /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		2D4410D723233A4CCEEF23D0 /* Pods_Reddit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reddit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		37ADB7E11C82050296D1C8BC /* Pods-RedditTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedditTests.release.xcconfig"; path = "Target Support Files/Pods-RedditTests/Pods-RedditTests.release.xcconfig"; sourceTree = "<group>"; };
+		45808F9A6468CC106A7873CE /* Pods-Reddit-RedditUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reddit-RedditUITests.release.xcconfig"; path = "Target Support Files/Pods-Reddit-RedditUITests/Pods-Reddit-RedditUITests.release.xcconfig"; sourceTree = "<group>"; };
+		53CF14817F74646C9F212EA5 /* Pods-RedditTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedditTests.debug.xcconfig"; path = "Target Support Files/Pods-RedditTests/Pods-RedditTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5A2F43DA81555711B670106C /* Pods-Reddit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reddit.release.xcconfig"; path = "Target Support Files/Pods-Reddit/Pods-Reddit.release.xcconfig"; sourceTree = "<group>"; };
+		7CE5F4ACBCDEB791797A2D7A /* Pods_Reddit_RedditUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reddit_RedditUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		931C6B1E2A05BB1400ED32D5 /* BaseUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUrl.swift; sourceTree = "<group>"; };
+		931C6B202A098B7000ED32D5 /* WeatherProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherProvider.swift; sourceTree = "<group>"; };
+		931C6B232A098BC200ED32D5 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		931C6B252A09905000ED32D5 /* WeatherResponseFromApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponseFromApi.swift; sourceTree = "<group>"; };
+		931C6B272A09DF6A00ED32D5 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		931C6B292A09E5A600ED32D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		931C6B2A2A0A705400ED32D5 /* FixedWeatherProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedWeatherProvider.swift; sourceTree = "<group>"; };
+		9340583E2A1FDD610007DE84 /* NewsPersistenceConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsPersistenceConfiguration.swift; sourceTree = "<group>"; };
+		934058412A1FDDAE0007DE84 /* NewsPersistenceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsPersistenceProvider.swift; sourceTree = "<group>"; };
+		934058442A1FDE2B0007DE84 /* NetworkingNewsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingNewsProvider.swift; sourceTree = "<group>"; };
+		934058462A1FDE430007DE84 /* NewPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPersistence.swift; sourceTree = "<group>"; };
+		934058492A1FE2C20007DE84 /* CombineNetworkingPersistenceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineNetworkingPersistenceProvider.swift; sourceTree = "<group>"; };
+		934058E12A263FBA0007DE84 /* NetworkingWeatherProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingWeatherProvider.swift; sourceTree = "<group>"; };
+		934058E32A2644EC0007DE84 /* URLCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLCreator.swift; sourceTree = "<group>"; };
+		934058E72A26471B0007DE84 /* AlamofireNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireNetworking.swift; sourceTree = "<group>"; };
+		934058E92A26474A0007DE84 /* URLSessionNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionNetworking.swift; sourceTree = "<group>"; };
 		935CDF7329F325B90010F6FB /* PaginationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationTests.swift; sourceTree = "<group>"; };
 		935CDFBB29FF3DC30010F6FB /* NewsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsProvider.swift; sourceTree = "<group>"; };
 		935CDFBD29FF3DEE0010F6FB /* FixedNewsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedNewsProvider.swift; sourceTree = "<group>"; };
 		935CDFBF2A00806A0010F6FB /* Pagination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pagination.swift; sourceTree = "<group>"; };
 		935CDFC12A0148F80010F6FB /* ErrorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorType.swift; sourceTree = "<group>"; };
+		ADB3EA0EA7BFB67313F9AF95 /* Pods-Reddit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reddit.debug.xcconfig"; path = "Target Support Files/Pods-Reddit/Pods-Reddit.debug.xcconfig"; sourceTree = "<group>"; };
+		B88921B17F7535930A45AF6F /* Pods-Reddit-RedditUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reddit-RedditUITests.debug.xcconfig"; path = "Target Support Files/Pods-Reddit-RedditUITests/Pods-Reddit-RedditUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		CE9BC86B3A6591FE4C717964 /* Pods_RedditTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RedditTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D578020029EE2E9700A60E80 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
 		D578020229EE337F00A60E80 /* DateExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensionTests.swift; sourceTree = "<group>"; };
 		D578020429EF0A3000A60E80 /* ErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
@@ -73,10 +117,9 @@
 		D5A8A51329E05E84004729EF /* RedditProyectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditProyectUITests.swift; sourceTree = "<group>"; };
 		D5A8A51529E05E84004729EF /* RedditProyectUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditProyectUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D5A8A52229E0656C004729EF /* NewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTableViewCell.swift; sourceTree = "<group>"; };
-		D5A8A52429E0AC85004729EF /* HttpConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpConnector.swift; sourceTree = "<group>"; };
+		D5A8A52429E0AC85004729EF /* Comments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comments.swift; sourceTree = "<group>"; };
 		D5A8A52629E0AE60004729EF /* NewsResponseFromApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsResponseFromApi.swift; sourceTree = "<group>"; };
 		D5A8A53529E45CD6004729EF /* NetworkingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingError.swift; sourceTree = "<group>"; };
-		D5A8A53729E45DF4004729EF /* HttpMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
 		D5A8A53929E48ADF004729EF /* New.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = New.swift; sourceTree = "<group>"; };
 		D5A8A53F29E493E3004729EF /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		D5A8A54229E578F8004729EF /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
@@ -90,6 +133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCC1F2B008E9AB72D085BF12 /* Pods_Reddit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +141,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE415E074D447A5C6C2D4DCE /* Pods_RedditTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,12 +149,122 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D3D6DE9ABDA22F585D9A8D1 /* Pods_Reddit_RedditUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0DDC07F12A17D17C00946C28 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				D5A8A54829E5D369004729EF /* NewDetailViewController.swift */,
+				935CDFBB29FF3DC30010F6FB /* NewsProvider.swift */,
+				934058482A1FE24F0007DE84 /* Mock */,
+				9340584B2A1FE2C80007DE84 /* CombineNetworkingPersistence */,
+				934058432A1FDE120007DE84 /* Networking */,
+				934058402A1FDD830007DE84 /* Persistence */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		0DDC07F22A17D17F00946C28 /* Weather */ = {
+			isa = PBXGroup;
+			children = (
+				931C6B202A098B7000ED32D5 /* WeatherProvider.swift */,
+				931C6B2A2A0A705400ED32D5 /* FixedWeatherProvider.swift */,
+				934058E12A263FBA0007DE84 /* NetworkingWeatherProvider.swift */,
+			);
+			path = Weather;
+			sourceTree = "<group>";
+		};
+		0DE8B3BC2A1E66870050F54D /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				0DE8B3BD2A1E668D0050F54D /* Networking.swift */,
+				D5A8A53529E45CD6004729EF /* NetworkingError.swift */,
+				934058E72A26471B0007DE84 /* AlamofireNetworking.swift */,
+				934058E92A26474A0007DE84 /* URLSessionNetworking.swift */,
+				934058E52A2645F80007DE84 /* URLCreator */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		300BF8085D97D2E3064C2D45 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2D4410D723233A4CCEEF23D0 /* Pods_Reddit.framework */,
+				7CE5F4ACBCDEB791797A2D7A /* Pods_Reddit_RedditUITests.framework */,
+				CE9BC86B3A6591FE4C717964 /* Pods_RedditTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5F69550CC4C16DD8B4978968 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				ADB3EA0EA7BFB67313F9AF95 /* Pods-Reddit.debug.xcconfig */,
+				5A2F43DA81555711B670106C /* Pods-Reddit.release.xcconfig */,
+				B88921B17F7535930A45AF6F /* Pods-Reddit-RedditUITests.debug.xcconfig */,
+				45808F9A6468CC106A7873CE /* Pods-Reddit-RedditUITests.release.xcconfig */,
+				53CF14817F74646C9F212EA5 /* Pods-RedditTests.debug.xcconfig */,
+				37ADB7E11C82050296D1C8BC /* Pods-RedditTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		934058402A1FDD830007DE84 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				934058462A1FDE430007DE84 /* NewPersistence.swift */,
+				9340583E2A1FDD610007DE84 /* NewsPersistenceConfiguration.swift */,
+				934058412A1FDDAE0007DE84 /* NewsPersistenceProvider.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		934058432A1FDE120007DE84 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				934058442A1FDE2B0007DE84 /* NetworkingNewsProvider.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		934058482A1FE24F0007DE84 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				935CDFBD29FF3DEE0010F6FB /* FixedNewsProvider.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		9340584B2A1FE2C80007DE84 /* CombineNetworkingPersistence */ = {
+			isa = PBXGroup;
+			children = (
+				934058492A1FE2C20007DE84 /* CombineNetworkingPersistenceProvider.swift */,
+			);
+			path = CombineNetworkingPersistence;
+			sourceTree = "<group>";
+		};
+		934058E52A2645F80007DE84 /* URLCreator */ = {
+			isa = PBXGroup;
+			children = (
+				934058E32A2644EC0007DE84 /* URLCreator.swift */,
+				931C6B1E2A05BB1400ED32D5 /* BaseUrl.swift */,
+			);
+			path = URLCreator;
+			sourceTree = "<group>";
+		};
+		934058EB2A264E230007DE84 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				D5A8A54C29E6F77E004729EF /* UserConfiguration.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
 		935CDFC32A014BA50010F6FB /* Error */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,18 +278,8 @@
 			isa = PBXGroup;
 			children = (
 				935CDFBF2A00806A0010F6FB /* Pagination.swift */,
-				935CDFBB29FF3DC30010F6FB /* NewsProvider.swift */,
-				935CDFBD29FF3DEE0010F6FB /* FixedNewsProvider.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		D578020829EF11DB00A60E80 /* Error */ = {
-			isa = PBXGroup;
-			children = (
-				D5A8A53529E45CD6004729EF /* NetworkingError.swift */,
-			);
-			path = Error;
 			sourceTree = "<group>";
 		};
 		D5A8A4E629E05E83004729EF = {
@@ -144,6 +289,8 @@
 				D5A8A4F129E05E83004729EF /* Reddit */,
 				D5A8A50829E05E84004729EF /* RedditTests */,
 				D5A8A51229E05E84004729EF /* RedditUITests */,
+				5F69550CC4C16DD8B4978968 /* Pods */,
+				300BF8085D97D2E3064C2D45 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -160,8 +307,11 @@
 		D5A8A4F129E05E83004729EF /* Reddit */ = {
 			isa = PBXGroup;
 			children = (
+				934058EB2A264E230007DE84 /* Persistence */,
+				0DE8B3BC2A1E66870050F54D /* Networking */,
 				D5A8A4F229E05E83004729EF /* AppDelegate.swift */,
-				D5A8A54C29E6F77E004729EF /* UserConfiguration.swift */,
+				0DDC07F12A17D17C00946C28 /* News */,
+				0DDC07F22A17D17F00946C28 /* Weather */,
 				D5A8A54129E493EE004729EF /* Extension */,
 				D5A8A53E29E48C14004729EF /* ViewController */,
 				D5A8A53D29E48BE9004729EF /* Http */,
@@ -187,24 +337,18 @@
 		D5A8A51229E05E84004729EF /* RedditUITests */ = {
 			isa = PBXGroup;
 			children = (
+				931C6B292A09E5A600ED32D5 /* Info.plist */,
 				D5A8A51329E05E84004729EF /* RedditProyectUITests.swift */,
 				D5A8A51529E05E84004729EF /* RedditProyectUITestsLaunchTests.swift */,
 			);
 			path = RedditUITests;
 			sourceTree = "<group>";
 		};
-		D5A8A52829E45B65004729EF /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				D5A8A52629E0AE60004729EF /* NewsResponseFromApi.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		D5A8A53B29E48BC8004729EF /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				D5A8A53929E48ADF004729EF /* New.swift */,
+				931C6B232A098BC200ED32D5 /* Weather.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -220,10 +364,9 @@
 		D5A8A53D29E48BE9004729EF /* Http */ = {
 			isa = PBXGroup;
 			children = (
-				D578020829EF11DB00A60E80 /* Error */,
-				D5A8A52829E45B65004729EF /* Model */,
-				D5A8A53729E45DF4004729EF /* HttpMethod.swift */,
-				D5A8A52429E0AC85004729EF /* HttpConnector.swift */,
+				D5A8A52629E0AE60004729EF /* NewsResponseFromApi.swift */,
+				931C6B252A09905000ED32D5 /* WeatherResponseFromApi.swift */,
+				D5A8A52429E0AC85004729EF /* Comments.swift */,
 			);
 			path = Http;
 			sourceTree = "<group>";
@@ -231,8 +374,8 @@
 		D5A8A53E29E48C14004729EF /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				931C6B272A09DF6A00ED32D5 /* WeatherViewController.swift */,
 				D5A8A4F629E05E83004729EF /* NewsViewController.swift */,
-				D5A8A54829E5D369004729EF /* NewDetailViewController.swift */,
 				935CDFC42A014FA80010F6FB /* Model */,
 				935CDFC32A014BA50010F6FB /* Error */,
 			);
@@ -257,9 +400,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D5A8A51929E05E84004729EF /* Build configuration list for PBXNativeTarget "Reddit" */;
 			buildPhases = (
+				7B6B1DE4636318B96EC114DE /* [CP] Check Pods Manifest.lock */,
 				D5A8A4EB29E05E83004729EF /* Sources */,
 				D5A8A4EC29E05E83004729EF /* Frameworks */,
 				D5A8A4ED29E05E83004729EF /* Resources */,
+				FB95ECC83952185C9E70B048 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -274,6 +419,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D5A8A51C29E05E84004729EF /* Build configuration list for PBXNativeTarget "RedditTests" */;
 			buildPhases = (
+				663CE70B3EA92D4D1D5A6338 /* [CP] Check Pods Manifest.lock */,
 				D5A8A50129E05E84004729EF /* Sources */,
 				D5A8A50229E05E84004729EF /* Frameworks */,
 				D5A8A50329E05E84004729EF /* Resources */,
@@ -292,9 +438,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D5A8A51F29E05E84004729EF /* Build configuration list for PBXNativeTarget "RedditUITests" */;
 			buildPhases = (
+				67283AA2C55B865237400195 /* [CP] Check Pods Manifest.lock */,
 				D5A8A50B29E05E84004729EF /* Sources */,
 				D5A8A50C29E05E84004729EF /* Frameworks */,
 				D5A8A50D29E05E84004729EF /* Resources */,
+				0763A1CA628D498031C19EEB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -375,28 +523,146 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0763A1CA628D498031C19EEB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Reddit-RedditUITests/Pods-Reddit-RedditUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Reddit-RedditUITests/Pods-Reddit-RedditUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Reddit-RedditUITests/Pods-Reddit-RedditUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		663CE70B3EA92D4D1D5A6338 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RedditTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		67283AA2C55B865237400195 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Reddit-RedditUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7B6B1DE4636318B96EC114DE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Reddit-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FB95ECC83952185C9E70B048 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Reddit/Pods-Reddit-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Reddit/Pods-Reddit-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Reddit/Pods-Reddit-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D5A8A4EB29E05E83004729EF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				D578020729EF0E3D00A60E80 /* UIViewController+Extension.swift in Sources */,
+				931C6B212A098B7000ED32D5 /* WeatherProvider.swift in Sources */,
+				934058EA2A26474A0007DE84 /* URLSessionNetworking.swift in Sources */,
 				D5A8A53A29E48ADF004729EF /* New.swift in Sources */,
+				934058452A1FDE2B0007DE84 /* NetworkingNewsProvider.swift in Sources */,
+				9340584A2A1FE2C20007DE84 /* CombineNetworkingPersistenceProvider.swift in Sources */,
+				0DE8B3BE2A1E668D0050F54D /* Networking.swift in Sources */,
 				D578020529EF0A3000A60E80 /* ErrorManager.swift in Sources */,
 				D5A8A54329E578F8004729EF /* Date+Extension.swift in Sources */,
 				D5A8A54929E5D369004729EF /* NewDetailViewController.swift in Sources */,
 				935CDFBC29FF3DC30010F6FB /* NewsProvider.swift in Sources */,
-				D5A8A53829E45DF4004729EF /* HttpMethod.swift in Sources */,
+				931C6B1F2A05BB1400ED32D5 /* BaseUrl.swift in Sources */,
 				D5A8A52329E0656C004729EF /* NewTableViewCell.swift in Sources */,
 				D5A8A55329EDD244004729EF /* Array+Extension.swift in Sources */,
+				934058E82A26471B0007DE84 /* AlamofireNetworking.swift in Sources */,
+				9340583F2A1FDD610007DE84 /* NewsPersistenceConfiguration.swift in Sources */,
 				935CDFBE29FF3DEE0010F6FB /* FixedNewsProvider.swift in Sources */,
 				D5A8A54D29E6F77E004729EF /* UserConfiguration.swift in Sources */,
+				931C6B282A09DF6A00ED32D5 /* WeatherViewController.swift in Sources */,
+				934058E42A2644EC0007DE84 /* URLCreator.swift in Sources */,
 				D5A8A52729E0AE60004729EF /* NewsResponseFromApi.swift in Sources */,
-				D5A8A52529E0AC85004729EF /* HttpConnector.swift in Sources */,
+				931C6B262A09905000ED32D5 /* WeatherResponseFromApi.swift in Sources */,
+				931C6B242A098BC200ED32D5 /* Weather.swift in Sources */,
+				934058472A1FDE430007DE84 /* NewPersistence.swift in Sources */,
+				934058422A1FDDAE0007DE84 /* NewsPersistenceProvider.swift in Sources */,
+				D5A8A52529E0AC85004729EF /* Comments.swift in Sources */,
 				935CDFC22A0148F80010F6FB /* ErrorType.swift in Sources */,
 				D5A8A4F729E05E83004729EF /* NewsViewController.swift in Sources */,
 				D5A8A53629E45CD6004729EF /* NetworkingError.swift in Sources */,
+				931C6B2B2A0A705400ED32D5 /* FixedWeatherProvider.swift in Sources */,
 				935CDFC02A00806A0010F6FB /* Pagination.swift in Sources */,
+				934058E22A263FBA0007DE84 /* NetworkingWeatherProvider.swift in Sources */,
 				D5A8A54029E493E3004729EF /* UIImage+Extension.swift in Sources */,
 				D5A8A4F329E05E83004729EF /* AppDelegate.swift in Sources */,
 			);
@@ -564,6 +830,7 @@
 		};
 		D5A8A51A29E05E84004729EF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ADB3EA0EA7BFB67313F9AF95 /* Pods-Reddit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -591,6 +858,7 @@
 		};
 		D5A8A51B29E05E84004729EF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5A2F43DA81555711B670106C /* Pods-Reddit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -618,6 +886,7 @@
 		};
 		D5A8A51D29E05E84004729EF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53CF14817F74646C9F212EA5 /* Pods-RedditTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -637,6 +906,7 @@
 		};
 		D5A8A51E29E05E84004729EF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37ADB7E11C82050296D1C8BC /* Pods-RedditTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -656,11 +926,14 @@
 		};
 		D5A8A52029E05E84004729EF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B88921B17F7535930A45AF6F /* Pods-Reddit-RedditUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RedditUITests/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vkorbenfeld.RedditProyectUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -673,11 +946,14 @@
 		};
 		D5A8A52129E05E84004729EF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45808F9A6468CC106A7873CE /* Pods-Reddit-RedditUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RedditUITests/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vkorbenfeld.RedditProyectUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

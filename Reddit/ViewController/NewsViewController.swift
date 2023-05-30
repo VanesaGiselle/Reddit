@@ -9,6 +9,14 @@ import UIKit
 
 class NewsViewController: UIViewController {
     private var news: [New] = []
+    private var newsProvider: NewsProvider
+    
+    init(newsProvider: NewsProvider) {
+        self.newsProvider = newsProvider
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) { return nil }
     
     private lazy var dismissAllButton: UIButton = {
         let button = UIButton()
@@ -40,7 +48,7 @@ class NewsViewController: UIViewController {
             self?.tableView.reloadData()
         }
         
-        pagination.newsProvider = HttpConnector()
+        pagination.newsProvider = self.newsProvider
 //        pagination.newsProvider = FixedNewsProvider()
 
         return pagination
