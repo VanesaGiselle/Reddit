@@ -8,6 +8,7 @@
 import UIKit
 
 class WeatherViewController: UIViewController {
+    private let weatherProvider: WeatherProvider
     private let cityCoordinates = (-34.6518, -58.6788)
     
     private lazy var cityLabel: UILabel = {
@@ -108,6 +109,15 @@ class WeatherViewController: UIViewController {
         return stackView
     }()
     
+    init(weatherProvider: WeatherProvider){
+        self.weatherProvider = weatherProvider
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         getWeather()
@@ -139,7 +149,7 @@ class WeatherViewController: UIViewController {
     }
 
     private func getWeather() {
-        HttpConnector().getWeather(completionHandler: {
+        weatherProvider.getWeather(completionHandler: {
             [weak self] result in
             guard let self = self else { return }
             switch result {

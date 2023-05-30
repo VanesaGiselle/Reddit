@@ -1,13 +1,17 @@
 //
-//  New.swift
+//  NewPersistence.swift
 //  Reddit
 //
-//  Created by Vanesa Korbenfeld on 10/04/2023.
+//  Created by Vanesa Korbenfeld on 25/05/2023.
 //
 
 import Foundation
 
-class New: Equatable, Codable {
+class NewPersistance: Equatable, Codable {
+    static func == (lhs: NewPersistance, rhs: NewPersistance) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     var id: String
     var thumbnail: String?
     var title: String
@@ -42,9 +46,5 @@ class New: Equatable, Codable {
         self.title = title
         self.author = author
         self.numComments = numComments
-    }
-    
-    static func ==(left: New, right: New) -> Bool {
-        return left.id == right.id
     }
 }
